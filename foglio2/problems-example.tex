@@ -1,0 +1,216 @@
+\documentclass{oxmathproblems}
+
+\printanswers
+\usepackage[italian]{babel}
+\oxfordterm{CompAP}
+\course{II Foglio Esercizi}
+\sheetnumber{2}
+\sheettitle{Gruppo Torrielli Federico - Sciandra Lorenzo}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\begin{document}
+\begin{questions}
+
+% Prima domanda
+\miquestion
+Prima risposta:
+\begin{solution}
+    Dato $N(t)$ Processo di Poisson di cui sappiamo per definizione che $N(0)=0$ (nel nostro caso N(9:00) = 0) e i cui intertempi ${T_i}$ sono indipendenti e distribuiti secondo esponenziale di parametro $\lambda=6$, possiamo scrivere $T=T_0+T_1$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Il tempo di arrivo del secondo cliente è quindi la somma dell'intertempo $T_0$ (tempo dell'arrivo del primo cliente) e di $T_1$ (tempo tra l'arrivo del primo e l'arrivo del secondo cliente).\\
+        Ricordando che $\sum^n_{i=1} x_i \sim exp(\lambda) = \Gamma(n,\lambda)$ con $n=2$ e $\lambda = 6$.\\
+        Otteniamo: $\sum^{2}_{i=1} T_i = \frac{\lambda \cdot e\sp{-\lambda\cdot t} (\lambda\cdot t)\sp{n-1}}{(n-1)!}=\frac{6\cdot e^{-6t}\cdot 6t}{1!}= 36t\cdot e^{-6t}$
+        
+        \item Il problema si configura come una somma di incrementi di intervallo $(s = 10 , t = 12)$\\
+        La distribuzione del numero di arrivi risulta essere:\\
+        $P(N_{(s,t)}=k)=P(N(t)-N(s)=k)=\frac{[\lambda \cdot (t-s)]^k\cdot e^{-\lambda(t-s)}}{k!}$\\
+        Nel nostro caso abbiamo che $\lambda = 6$ e $t-s=2$, sostituendo otteniamo: $\frac{12^k \cdot e^{-12}}{k!}$, Poisson distribuita con $\lambda = 12$.
+        
+        \item Il tempo di arrivo del primo cliente (o tempo che devo aspettare per il primo evento) è un'esponenziale di parametro $\lambda = 6$, quindi, $P(T_0 > t) = e^{-6t}$.\\
+        Sapendo che tra le 9:00 $(i)$ e le 9:30 $(f)$ è arrivato un solo cliente la formula che otteniamo è: $P(T_0 > t | N(f) - N(i) = 1) = P(T_0 > t | N(f) = 1) = \frac{P(T_0 > t, N(f)=1)}{P(N(f) = 1)} = \frac{P(N(t)=0, N(f)=1)}{P(N(f) = 1)}= \frac{P(N(t)=0) \cdot P(N(f)=1)}{P(N(f) = 1)} = P(N(t)=0) = e ^{\lambda t} = e^{-6t}$\\
+        $P(T_0< t) = 1 - e^{-6\lambda}$
+        
+    \end{enumerate}
+\end{solution}
+
+% Seconda domanda
+\miquestion
+Seconda risposta:
+
+\begin{solution}
+    Supponiamo $\mu_1 \neq \mu_2$ ossia rispettivamente $X_1, X_2$ due v.a. esponenziali non identicamente distribuite:
+    \begin{enumerate}[label=(\alph*)]
+        \item Conoscendo la proprietà di assenza di memoria dell'esponenziale e le sue proprietà note devo calcolare $P(X_1< X_2) = \frac{\mu_1}{\mu_2 + \mu_1}$ (probabilità che il tempo di servizio del servitore 1 sia minore del tempo di servizio del 2)
+        \item La probabilità che devo calcolare si può riscrivere come: $1-P($il cliente B non è più nel sistema).\\
+        Il problema può essere visto diversamente considerando come se tutti e tre fossimo in una stessa coda presso un servitore con tempo di servizio $\mu_2$ ed io aspettassi in coda un tempo esponenziale $\mu_1$ prima di lasciarla. In questa circostanza il problema diventa: qual è la probabilità che A e B vengano serviti prima che io lasci la coda? In altre parole, qual è la probabilità che io venga servito e che quindi non lasci la coda?\\
+        $P(\text{io sia servito}) = P(\mu_1 = min (\mu_1,\mu_2))\cdot P(\text{essere servito} |\mu_1 = min (\mu_1,\mu_2)) + P(\mu_1 \neq min (\mu_1,\mu_2))\cdot P(\text{essere servito} |\mu_1 \neq min (\mu_1,\mu_2))$\\
+        Il primo termine è 0 dato che se $\mu_1$ è minimo non verrò mai servito. Nel secondo termine invece ($\mu_1$ non è il minimo), A lascia la coda e per assenza di memoria mi ritrovo in una situazione simile a quella iniziale:\\
+        $(1-\frac{\mu_1}{\mu_1+\mu_2})\cdot P(\text{essere servito} | \text{A esce e la coda scala di una posizione})=$\\
+        $(1-\frac{\mu_1}{\mu_1+\mu_2})\cdot [P(\mu_1 = min (\mu_1,\mu_2))\cdot P(\text{essere servito} |\mu_1 = min (\mu_1,\mu_2)) + P(\mu_1 \neq min (\mu_1,\mu_2))\cdot P(\text{essere servito} |\mu_1 \neq min (\mu_1,\mu_2))]=(1-\frac{\mu_1}{\mu_1+\mu_2})\cdot[(1-\frac{\mu_1}{\mu_1+\mu_2})\cdot 1] = (1-\frac{\mu_1}{\mu_1+\mu_2})^2$\\
+        Quest'ultima è la probabilità che io venga servito o che, nel problema originario, il mio tempo di attesa presso il servitore 1 superi le attese del cliente A e del cliente B presso il servitore 2. La probabilità richiesta sarà quindi:\\ 
+        $1-(1-\frac{\mu_1}{\mu_1+\mu_2})^2 = \frac{2\mu_1}{\mu_1+\mu_2} - \frac{\mu_1^2}{(\mu_1+\mu_2)^2}$
+        \item Per calcolare l'attesa introduciamo una v.a. di supporto\\ \\
+        $Y= 
+        \begin{cases}
+            0 &\text{se quando arrivo al secondo servitore A non ci sia più}\\
+            1 &\text{se quando arrivo al secondo servitore sia A che B ci sono ancora}\\
+            2 &\text{se quando arrivo al secondo servitore sono rimasto solo}
+        \end{cases}$\\\\
+        Calcoliamo allora $E(T)$ utilizzando il teorema della doppia attesa:\\
+        $E(E(T | Y)) = E(T | Y=0) \cdot P(Y=0) + E(T | Y=1) \cdot P(Y=1) + E(T | Y=2) \cdot P(Y=2)$\\
+        Risolviamo allora i tre casi associati al problema:
+        \begin{itemize}
+            \item $E(T | Y=0)$ Il cliente A esce dal sistema prima che io termini il turno del servitore 1. Devo quindi aspettare il tempo $\frac{1}{\mu_i}$ di servizio presso il servitore 1 per poi accodarmi dietro a B per il servizio dal servitore 2. L'attesa complessiva nel sistema è: $\frac{1}{\mu_1} + \frac{2}{\mu_2}$. La probabilità associata $P(Y=0)= P(X_2< X_1) = \frac{\mu_2}{\mu_1+\mu_2}$.
+            \item $E(T | Y=1)$ Il tempo che attendo nel sistema in questo caso è il tempo presso il servitore 1 e il tempo per tre servizi presso il servitore 2 dato che arriverò al servitore 2 con A ancora nel sistema. $E(T|Y=1)= \frac{1}{\mu_1} + \frac{3}{\mu_2}$. La probabilità associata è dunque: $P(Y=1) = P(X_1< X_2) = \frac{\mu_1}{\mu_1+\mu_2}$.
+            \item $E(T | Y=2)$ In questo caso una volta trascorso il tempo presso il servitore 1 arriverò al servitore 2 nel momento in cui posso passare poiché A e B non sono più nel sistema.\\
+            $E(T | Y=2) = \frac{1}{\mu_1}+\frac{1}{\mu_2}$. La P associata è stata calcolata nel punto (b) ed è $P(Y=2)= (1-\frac{\mu_1}{\mu_1+\mu_2})^2 = \frac{\mu_2^2}{(\mu_1+\mu_2)^2}$  
+        \end{itemize}
+        Dunque sostituendo nella formula di prima: \\
+        $E(T | Y=0) \cdot P(Y=0) + E(T | Y=1) \cdot P(Y=1) + E(T | Y=2) \cdot P(Y=2) =$\\
+        $[(\frac{1}{\mu_1} + \frac{2}{\mu_2})\cdot \frac{\mu_2}{\mu_1+\mu_2}] +  [(\frac{1}{\mu_1} + \frac{3}{\mu_2})\cdot \frac{\mu_1}{\mu_1+\mu_2}] +[ (\frac{1}{\mu_1}+\frac{1}{\mu_2}) \cdot \frac{\mu_2^2}{(\mu_1+\mu_2)^2}] =$\\
+        $
+        [\frac{\mu_2 + 2\mu_1}{\mu_1\mu_2} \cdot \frac{\mu_2}{\mu_1+\mu_2}] +  [\frac{\mu_2 + 3\mu_1}{\mu_1\mu_2} \cdot \frac{\mu_1}{\mu_1+\mu_2}] +[ \frac{\mu_2 + \mu_1}{\mu_1\mu_2} \cdot \frac{\mu_2^2}{(\mu_1+\mu_2)^2}]=
+        -\frac{2}{\mu_1+\mu_2} + \frac{2}{\mu_1} +\frac{3}{\mu_2}$
+    \end{enumerate}
+\end{solution}
+
+% Terza domanda
+\miquestion
+Terza risposta: 
+
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+        \item Gode della proprietà di Markov poichè ad ogni vertice ho sempre gli stessi vertici associati con la medesima probabilità in cui posso spostarmi indipendentemente dalla storia precedente.
+        $$
+        \begin{bmatrix}
+            0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0\\
+            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0\\
+            0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0\\
+            \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & 0\\
+            0 & 0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} & 0\\
+            0 & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3}\\
+            0 & 0 & 0 & 0 & 0 & 1 & 0\\
+        \end{bmatrix}
+        \quad
+        $$
+        \item ~
+        \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+        \tikzstyle{every node}+=[inner sep=0pt]
+        \draw [black] (11.8,-6.8) circle (3);
+        \draw (11.8,-6.8) node {$1$};
+        \draw [black] (11.8,-18.6) circle (3);
+        \draw (11.8,-18.6) node {$2$};
+        \draw [black] (32.8,-12.9) circle (3);
+        \draw (32.8,-12.9) node {$3$};
+        \draw [black] (53.2,-5.8) circle (3);
+        \draw (53.2,-5.8) node {$4$};
+        \draw [black] (62.4,-13.9) circle (3);
+        \draw (62.4,-13.9) node {$5$};
+        \draw [black] (18.1,-25) circle (3);
+        \draw (18.1,-25) node {$6$};
+        \draw [black] (48,-24.2) circle (3);
+        \draw (48,-24.2) node {$7$};
+        \draw [black] (11.8,-9.8) -- (11.8,-15.6);
+        \fill [black] (11.8,-15.6) -- (12.3,-14.8) -- (11.3,-14.8);
+        \draw (11.3,-12.7) node [left] {$1/2$};
+        \draw [black] (11.8,-15.6) -- (11.8,-9.8);
+        \fill [black] (11.8,-9.8) -- (11.3,-10.6) -- (12.3,-10.6);
+        \draw [black] (14.7,-17.81) -- (29.9,-13.69);
+        \fill [black] (29.9,-13.69) -- (29,-13.41) -- (29.26,-14.38);
+        \draw (23.78,-16.37) node [below] {$1/2$};
+        \draw [black] (29.9,-13.69) -- (14.7,-17.81);
+        \fill [black] (14.7,-17.81) -- (15.6,-18.09) -- (15.34,-17.12);
+        \draw (20.82,-15.13) node [above] {$1/3$};
+        \draw [black] (35.63,-11.91) -- (50.37,-6.79);
+        \fill [black] (50.37,-6.79) -- (49.45,-6.58) -- (49.78,-7.52);
+        \draw (44.73,-9.91) node [below] {$1/3$};
+        \draw [black] (50.37,-6.79) -- (35.63,-11.91);
+        \fill [black] (35.63,-11.91) -- (36.55,-12.12) -- (36.22,-11.18);
+        \draw [black] (55.45,-7.78) -- (60.15,-11.92);
+        \fill [black] (60.15,-11.92) -- (59.88,-11.01) -- (59.22,-11.76);
+        \draw (55.88,-10.34) node [below] {$1/3$};
+        \draw [black] (60.15,-11.92) -- (55.45,-7.78);
+        \fill [black] (55.45,-7.78) -- (55.72,-8.69) -- (56.38,-7.94);
+        \draw (59.72,-9.36) node [above] {$1/2$};
+        \draw [black] (59.49,-14.63) -- (21.01,-24.27);
+        \fill [black] (21.01,-24.27) -- (21.91,-24.56) -- (21.66,-23.59);
+        \draw (38.87,-18.82) node [above] {$1/2$};
+        \draw [black] (21.01,-24.27) -- (59.49,-14.63);
+        \fill [black] (59.49,-14.63) -- (58.59,-14.34) -- (58.84,-15.31);
+        \draw [black] (21.1,-24.92) -- (45,-24.28);
+        \fill [black] (45,-24.28) -- (44.19,-23.8) -- (44.21,-24.8);
+        \draw (33.08,-25.15) node [below] {$1/3$};
+        \draw [black] (45,-24.28) -- (21.1,-24.92);
+        \fill [black] (21.1,-24.92) -- (21.91,-25.4) -- (21.89,-24.4);
+        \draw (33.03,-24.07) node [above] {$1$};
+        \draw [black] (20.42,-23.09) -- (30.48,-14.81);
+        \fill [black] (30.48,-14.81) -- (29.55,-14.93) -- (30.18,-15.7);
+        \draw (27.36,-19.44) node [below] {$1/3$};
+        \draw [black] (14.8,-6.73) -- (50.2,-5.87);
+        \fill [black] (50.2,-5.87) -- (49.39,-5.39) -- (49.41,-6.39);
+        \draw (32.52,-6.85) node [below] {$1/2$};
+        \draw [black] (50.2,-5.87) -- (14.8,-6.73);
+        \fill [black] (14.8,-6.73) -- (15.61,-7.21) -- (15.59,-6.21);
+        \draw (32.48,-5.75) node [above] {$1/3$};
+        \end{tikzpicture}
+        \end{center}
+        Guardando il grafo degli stati associati vediamo che è fortemente connesso, e da ogni nodo posso raggiungere qualsiasi altro. Ci sarà quindi una sola classe d'equivalenza e la catena è quindi irriducibile.\\
+        La distribuzione stazionaria viene calcolata tenendo in considerazione: $\pi=\pi\cdot P$ e $\sum_{i}\pi\sb{i} = 1$. Si ottiene quindi:
+        \begin{equation}
+            \begin{split}
+                \pi\sb{1} &=  \frac{1}{2} \pi\sb{2} + \frac{1}{3}\pi\sb{4}\\
+                \pi\sb{2} &=   \frac{1}{2}\pi\sb{1} +  \frac{1}{3}\pi\sb{3}\\
+                \pi\sb{3} &=  \frac{1}{2}\pi\sb{2}  + \frac{1}{3}\pi\sb{4} + \frac{1}{3} \pi\sb{6}\\
+                \pi\sb{4} &=  \frac{1}{2}\pi\sb{1} +  \frac{1}{3}\pi\sb{3} + \frac{1}{2}\pi\sb{5}\\
+                \pi\sb{5} &=   \frac{1}{3}\pi\sb{4} +  \frac{1}{3}\pi\sb{6}\\
+                \pi\sb{6} &=  \frac{1}{3}\pi\sb{3}  + \frac{1}{3}\pi\sb{5} + \pi\sb{7}\\
+                \pi\sb{7} &=  \frac{1}{3}\pi\sb{6} \\
+                 1        &=  \pi\sb{1} + \pi\sb{2} + \pi\sb{3} +  \pi\sb{4} + \pi\sb{5}  + \pi\sb{6} +\pi\sb{7}  \\ 
+            \end{split}
+        \end{equation}
+    Risolvendo il sistema (1) la distribuzione stazionaria è:
+    \[
+        \pi = (\frac{2}{16},\frac{2}{16},\frac{3}{16},\frac{3}{16},\frac{2}{16},\frac{3}{16},\frac{1}{16} )
+    \]
+    Se aggiungo link da 5 a 7 il grafo continua ad essere fortemente connesso, ma cambia la matrice, di conseguenza anche il sistema (1) e la distribuzione stazionaria diventa:
+    \[
+        \pi = (\frac{1}{9},\frac{1}{9},\frac{1}{6},\frac{1}{6},\frac{1}{6},\frac{1}{6},\frac{1}{9} )
+    \]
+    
+    \item Idea, se considerassi i due stati 4 e 5 come stati assorbenti, il problema di calcolare la probabilità di raggiungere 5 prima di 4 traslato in questa nuova catena diventerebbe quello di determinare la probabilità di giungere in 5, dato che da lì non potrei più uscire. Allo stesso modo se per sbaglio arrivassi in 4, non potrei mai più raggiungere lo stato 5.
+    La nuova matrice risulta:
+    $$
+    \begin{bmatrix}
+            0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0\\
+            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0\\
+            0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0\\
+            0 & 0 & 0 & 1 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0 & 1 & 0 & 0\\
+            0 & 0 & \frac{1}{3} & 0 & \frac{1}{3} & 0 & \frac{1}{3}\\
+            0 & 0 & 0 & 0 & 0 & 1 & 0\\
+    \end{bmatrix}
+    $$
+    
+    In questo caso il sistema, contente le varie $p_i$ probabilità di partire dallo stato $i$ per giungere nello stato 5, che dobbiamo risolvere risulta essere:
+    
+    \begin{equation}
+            \begin{split}
+                p\sb{1} &=  \frac{1}{2} p\sb{2} + \frac{1}{2} p\sb{4}\\
+                p\sb{2} &=   \frac{1}{2}p\sb{1} +  \frac{1}{2}p\sb{3}\\
+                p\sb{3} &=  \frac{1}{3}p\sb{2} + \frac{1}{3} p\sb{4}+ \frac{1}{3} p\sb{6}\\
+                p\sb{4} &= 0\\
+                p\sb{5} &= 1\\
+                p\sb{6} &=  \frac{1}{3}p\sb{3}  + \frac{1}{3}p\sb{7} + \frac{1}{3}p\sb{5}\\
+                p\sb{7} &= p\sb{6} \\
+            \end{split}
+    \end{equation}
+    Risolvendo per $p_2$ di nostro interesse, dato che la cavia parte da 2, otteniamo: $p_2 = \frac{2}{11}$
+    \end{enumerate}
+\end{solution}
+
+\end{questions}
+\end{document}

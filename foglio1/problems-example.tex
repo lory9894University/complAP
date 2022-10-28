@@ -1,0 +1,143 @@
+\documentclass{oxmathproblems}
+
+\printanswers
+\usepackage[italian]{babel}
+\oxfordterm{CompAP}
+\course{I Foglio Esercizi}
+\sheetnumber{1}
+\sheettitle{Gruppo Torrielli Federico - Sciandra Lorenzo}
+
+
+\begin{document}
+
+\begin{questions}
+
+% Prima domanda
+\miquestion
+Prima risposta:
+\begin{itemize}
+    \item $E(X)$
+    \item $Var(X)$
+\end{itemize}
+
+\begin{solution}
+    \\
+    Se scelgo A $\longrightarrow Poisson(2.6)$\\
+    Se scelgo B $\longrightarrow Poisson(3)$\\
+    Se scelgo C $\longrightarrow Poisson(3.4)$\\
+    X='Numero di errori nel dattiloscritto'\\\\
+    Y=$\begin{cases}
+        1\text{ - se scelgo dattilografo A}\\
+        2\text{ - se scelgo dattilografo B}\\
+        3\text{ - se scelgo dattilografo C}
+    \end{cases}$
+    Tutti i casi hanno $P=1/3$\\\\
+    Uso il teorema della doppia attesa:\\
+    \begin{equation}
+        EX=E[E[X|Y]=E[X|Y=1]\cdot1/3+E[X|Y=2]\cdot1/3+E[X|Y=3]\cdot1/3
+    \end{equation}
+    \[
+       \begin{array}{l}
+            E[X|Y=1]=2.6\\
+            E[X|Y=2]=3\\
+            E[X|Y=3]=3.4\\
+        \end{array}
+    \]
+    Riprendendo l'equazione (1) e sostuendo:\\
+    \[
+    EX=1/3\cdot2.6+1/3\cdot3+1/3\cdot3.4=\frac{2.6+3+3.4}{3}=9/3=\textbf{3}
+    \]\\
+    Varianza: per calcolare la varianza di X $\longrightarrow VarX=EX^2-E^2X$\\
+    $E^2X=(EX)^2=(3)^2=9$ già calcolato\\
+    A questo punto calcoliamo $E[X^2]$\\
+    $EX^2=E[E[X^2|Y]]=E[X^2|Y=1]\cdot1/3+E[X^2|Y=2]\cdot1/3+E[X^2|Y=3]\cdot1/3$\\
+    Sapendo che il momento quadro di una Poisson è $\lambda^2+\lambda$ ottengo:\\
+    \[
+        \begin{array}{l}
+           E[X^2|Y=1] = (2.6^2+2.6) \\
+            E[X^2|Y=2] = (3^2+3)\\
+            E[X^2|Y=3] = (3.4^2+3.4)
+        \end{array}
+    \]
+    Sostituendo alla formula di prima otteniamo:\\
+    $E[X^2]=(2.6^2+2.6)\cdot1/3+(3^2+3)\cdot1/3+(3.4^2+3.4)\cdot1/3=\frac{36.32}{3}\simeq12.11$\\
+    Quindi, riprendendo la formula della varianza di X: $12.11-9=3.11$
+\end{solution}
+
+% Seconda domanda
+\miquestion
+Seconda risposta: ($\forall y > 0$)
+\begin{itemize}
+    \item $f_{X|Y}(x|y)$
+    \item $P(X>2|Y=y)$
+    \item $E(X|Y)$
+    \item $E(X+Y^2|Y)$
+\end{itemize}
+
+\begin{solution}
+    Conoscendo la probabilità congiunta di (X,Y) $f(x,y)$ definita solo per\\
+    $x,y > 0$ tutti gli integrali nelle formule che seguiranno saranno calcolati da $0$ a $\infty$:
+    \begin{itemize}
+    \item La densità di probabilità di $X|Y$: $f_{X|Y}(x|y)=\frac{f_{x,y}(x,y)}{f_y(y)}=\frac{f_{x,y}(x,y)}{\int_0^\infty f_{x,y}(x,y) dx}=$\\$=\frac{ye^{-y(x+1)}}{\int_0^\infty ye^{-y(x+1)} dx}=\frac{ye^{-yx}e^{-y}}{e^{-y}}=ye^{-yx}$
+    \item $P(X>2|Y=y)=\int_2^\infty f_{x|y}(x|y) dx=\int_2^\infty ye^{-yx}=e^{-2y}$
+    \item Calcolo prima $E(X|Y=y)$, funzione di y, da cui otterrò direttamente la funzione della v.a. Y:\\ $E(X|Y=y)=\int_0^\infty x\cdot f_{X|Y}dx=\int_0^\infty x\cdot ye^{-yx}dx=\frac{1}{y}$\\
+    Quindi: $E(X|Y)=\frac{1}{Y}$
+    \item $E(X+Y^2|Y)=$ per linearità $=E[X|Y]+E[Y^2|Y]=E[X|Y]+Y^2=\frac{1}{Y}+Y^2=\frac{Y^3+1}{Y}$
+\end{itemize}
+\end{solution}
+
+% Terza domanda
+\miquestion
+Terza risposta: 
+\begin{itemize}
+    \item $P(S_N=0)$
+    \item $P(S_N=1)$
+    \item $E(S_N|N=5)$
+    \item $E(S_N|N)$
+\end{itemize}
+
+\begin{solution}
+    \\
+    $S_N = X_1 + X_2+...+X_N$ si configura come una distribuzione binomiale di N v.a. di Bernoulli.
+    La difficoltà risiede quindi nella v.a. N di Poisson con parametro $\lambda$, dato che dovremmo agire considerando la binomiale per tutti gli n che N può assumere.\\
+    \begin{itemize}
+        \item $P(S_N=0)= \sum_{n} P(S\sb{N} = 0, N = n) = \sum_{n}  P(S\sb{n} = 0 | N = n)\cdot P (N = n) = \sum_{n} P (S\sb{n} = 0) \cdot P (N = n) = \sum_{n}\binom{n}{0}p^0(1-p)^{n-0}\cdot\frac{\lambda^n}{n!}e^{-\lambda}=\sum_{n}(1-p)^{n}\cdot\frac{\lambda^n}{n!}e^{-\lambda}$
+        \item $P(S_N=1)= \text{ riprendendo i calcoli dal passo precedente =}\sum_{n}\binom{n}{1}p(1-p)^{n-1}\cdot\frac{\lambda^n}{n!}e^{-\lambda}=\sum_{n}np(1-p)^{n-1}\cdot\frac{\lambda^n}{n!}e^{-\lambda}$
+        \item $E(S_N|N=5)=E(S_5|N=5)=$ per indipendenza $=E(S_5)=$ che è Binomiale(5,p) il cui valore atteso è $=5p$
+        \item Partiamo col calcolare $E(S_N|N=n)$ possiamo riscriverlo come: \\
+        $E(\sum_{i=1}^N X_i|N=n)=E(\sum_{i=1}^n X_i|N=n)$  = per linearità dell'attesa = \\ $=\sum_{i=1}^nE[X_i|N=n]=n\cdot(1P(X_i=1|N=n)+0P(X_i=0|N=n))=nP(X_i=1|N=n)=$ per indipendenza $=np$\\
+        Da cui otteniamo $E(S_N|N)=Np$
+    \end{itemize}
+\end{solution}
+
+% Quarta domanda
+\miquestion
+Quarta risposta:
+\begin{itemize}
+    \item $E(N)$
+\end{itemize}
+
+\begin{solution}
+    Risolveremo il problema calcolando l'attesa della v.a. opportunamente condizionata. Procediamo come segue:\\
+    Sia:
+    \begin{itemize}
+        \item N= numero di lanci necesssari per ottenere due 6 consecutivi con 1 dado.
+        \item X= 
+        $\begin{cases}
+            \text{1 se al primo lancio abbiamo un 6}\\
+            \text{2 altrimenti}
+        \end{cases}$
+    \end{itemize}
+    Per il teorema della doppia attesa $E[N]=E[E[N|X]]=E[N|X=1]P(X=1)+E[N|X=2]P(X=2)=E[N|X=1]1/6+E[N|X=2]5/6$\\
+    Analizziamo separatamente i due casi:
+    \begin{enumerate}
+        \item Primo caso: $E[N|X=2]=1+E[N]$ (Semplicemente si spreca un lancio)
+        \item Secondo caso: $E[N|X=1]=1+(1\cdot1/6+(1+E[N])\cdot5/6)=\frac{12+5E[N]}{6}=2+\frac{5}{6}E[N]$
+    \end{enumerate}
+    Riguardo al secondo caso, il termine tra parentesi indica che oltre al primo lancio di cui sappiamo l'esito 6 si terminerà in un solo altro passo con probabilità 1/6, mentre con probabilità 5/6 avremo solamente sprecato un altro lancio.\\
+    Sostituiamo dunque questi nella formula originaria, trovando:\\ 
+    $E[N]=\frac{1}{6}\cdot (2+\frac{5}{6}E[N])+\frac{5}{6}\cdot(1 + E[N])\longrightarrow \frac{E[N]}{36}=\frac{7}{6} \longrightarrow E[N]=42$
+\end{solution}
+
+\end{questions}
+\end{document}
