@@ -31,9 +31,10 @@
 \begin{document}
 
 \author{Lorenzo Dentis, lorenzo.dentis@edu.unito.it}
-\title{Numeri Complessi}
+\title{Appunti di Analisi}
 \maketitle
-\section{definizione}
+\section{Numeri Complessi}
+\subsection{definizione}
 \begin{definition}
 	Un numero complesso è una coppia ordinata $ (x,y) $ con $ x,y \in \mathbb{R} $.
 	Nell' insieme dei numeri complessi $ \mathbb{C} = \{z = x + iy | x,y \in \mathbb{R}\} $ (posti $z_1,z_2 \in \mathbb{C}$) si definiscono le seguenti operazioni.
@@ -47,7 +48,7 @@ Un numero complesso può essere anche scritto in forma algebrica $z= x+iy$.
 \begin{definition}
 	Dato $z= (x,y)$ definisco "coniugato di $z$": $\overline z = (x,-y)$
 \end{definition}
-\section{proprietà}
+\subsection{proprietà}
 Essendo un numero complesso una coppia di numeri reali, si può affermare $\mathbb{C} = \mathbb{R}^2$?\\
 Sì,no,sì.\\ 
 Insiemisticamente sono uguali \appunto{tanto che spesso si rappresentano i numeri immaginari sul piano di Gauss (piano complesso)} , $z$ è un punto in $\R^2$ di coordinate $(x,y)$
@@ -63,8 +64,8 @@ Nota: il prodotto fornisce anche una giustificazione alle proprietà dell' \text
 \end{definition}
 Infatti $i^2=(0,1)^2 = (0,1)(0,1) = (0*0 -1*1,0*1, 1 *0) = (-1,0) = 1$
 
-\section{Altre forme di scrittura}
-\subsection{Trigonometrica}
+\subsection{Altre forme di scrittura}
+\subsubsection{Trigonometrica}
 Rappresentando sul piano complesso un numero complesso $z$ notiamo che si può esprimere la sua "posizione" anche in coordinate polari.\\
 \begin{figure}[H]
 	\begin{subfigure}[c]{0.5\textwidth}
@@ -89,7 +90,7 @@ Rappresentando sul piano complesso un numero complesso $z$ notiamo che si può e
 $$ z=x + iy = \rho\, cos \theta + i\,\rho \, sin \theta = \rho (cos\theta + i\,sin \theta)$$
 Chiamiamo questo modo di esprimere un numero complesso "formai algebrica scritta in modo trigonometrico"
 
-\subsection{Esponenzionale}
+\subsubsection{Esponenzionale}
 \begin{definition}[Formula di De Moivre]
 	$$e^{i\theta} = cos\theta + i\, sen\theta$$
 \end{definition}
@@ -100,7 +101,7 @@ $$ z = \rho (cos \theta + sen \theta)=  \rho e^{i \theta}$$
 	$$e^z = e^xe^{iy}=e^x(cos\,y + i \, sen\,x)$$
 \end{definition}
 La forma esponenziale permette di svolgere calcoli in maniera più semplice (soprattuto moltiplicazioni e potenze). 
-\subsection{note}
+\subsubsection{note}
 Equivalenza tra la scrittura in forme algebrica e la scrittura come coppia di numeri reali.\\
 $x = (x,0)\; y=(y,0),\; i=(0,1)$\\ 
 $x+iy = (x,0) + (0,1)*(y,0) = (x,0) + (0*y - 1*0, 0*0 + 1*y ) = (x,0) + (0,y) = (x,y)$
@@ -115,5 +116,65 @@ quindi può essere "scomposta": $f(t) = f_1(t) + i\,f_2(t)$.
 \begin{definition}[Integrale a valori complessi]
 	$$\int_If(t) dt = \int_If_1(t) dt + i\, \int_If_2(t) dt$$
 \end{definition}
+
+\section{Segnali e sistemi}
+\subsection{Segnali}
+\begin{definition}[Segnale]
+	Un Segnale è una grandezza fisica variabile nello spazio o nel tempo, rappresentato dalla funzione $f = \R^d \rightarrow \R \; o \; \C$.\\
+	Distinguiamo i segnali \textit{analogici} con dominio $\R$ ed i segnali le cui misurazioni sono fatte ad intervalli di tempo (tecnica detta \textit{sampling}) cioè i segnali \textit{analogici} con dominio $\mathbb{Z} \; o \; \mathbb{N}$.
+\end{definition}
+\begin{figure}[H]
+	\begin{subfigure}[c]{0.5\textwidth}
+	\includegraphics[width=\textwidth]{heavyside_func.png}
+	\end{subfigure}
+	\begin{subfigure}[c]{0.5\textwidth}
+		\begin{equation*}
+			\mu(t) = 
+			\begin{cases}
+				0 \qquad se \qquad t<0 \\
+				1 \qquad se \qquad t>0 
+			\end{cases}
+		\end{equation*}
+	\end{subfigure}
+	\caption{Heavyside function} \label{FIG:heavyside}
+\end{figure}
+\begin{figure}[H]
+	\begin{subfigure}[c]{0.5\textwidth}
+	\includegraphics[width=\textwidth]{rectangular_window.png}
+	\end{subfigure}
+	\begin{subfigure}[c]{0.5\textwidth}
+		\begin{equation*}
+			r(t) = 
+			\begin{cases}
+				1 \qquad se \qquad |t|<0 \\
+				0 \qquad se \qquad |t|>0 
+			\end{cases}
+		\end{equation*}
+	\end{subfigure}
+	\caption{Funzione finestra rettangolare} \label{FIG:rectangular}
+\end{figure}
+\begin{figure}[H]
+	\begin{subfigure}[c]{0.5\textwidth}
+	\includegraphics[width=\textwidth]{generic_sin.png}
+	\end{subfigure}
+	\begin{subfigure}[c]{0.5\textwidth}
+		$$x(t) = \alpha cos(2\pi \omega t + \phi)$$
+		ove $|\alpha|$ è l'ampiezza, $\omega$ la frequenza (quindi $\frac{1}{\omega}$ il periodo). $\phi$ la fase.
+		Identicamente si può esprimere la generica sinusoidie in funzione del seno.
+		$$x(t) = \alpha sen(2\pi \omega t + \phi)$$
+	\end{subfigure}
+	\caption{Sinusoide generica} \label{FIG:generic_sin}
+\end{figure}
+Le due notazioni possono essere accorpate in un'unica funzione, che, \appunto{grazie alla formula di De Moivre}, può essere riscritta in notazione esponenziale.
+$$x(t) = \alpha (cos(\omega t + \phi) + i \; sen ( \omega t + \phi)) = \alpha e^{i(\omega t + \phi)}$$
+\appunto{Il $2 \pi$ può tranquillamente essere omesso in quanto costante}
+
+\subsection{Sistemi}
+\begin{definition}[Transmission system]
+	Un "apparato" che riceve un segnale in input e trasmette un segnali in output. Indicato come $y=A(x)$ o in breve $y=Ax$.
+\end{definition}
+esempi di semplici sistemi sono: l'amplificatore $y(t) = kx(t)$ con $k$ costante , delayer $y(t) = x(t-a)$ con $a$ costante o il "derivatore" $y(t) = x'(t)$
+
+\subsubsection{proprietà dei sistemi}
 
 \end{document}
