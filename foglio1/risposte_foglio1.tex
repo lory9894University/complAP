@@ -70,6 +70,32 @@ Analogmantente al punto precedente si può calcolare $\E[X^2]$
 Sostituendo nella equazione\eqref{var}
 $$Var(X) =  p(1-\lambda -\lambda^2) + \lambda(1+\lambda) - (p - \lambda(1-p))^2 $$
 \subsection{}
+Sia $\{X_i\}i=1,2,...$ una successione di v.a. distribuite come $X$ e sia $Y = \sum_{i=1}^M$, con $M$ v.a. di Poisson di parametro $\beta$, indipendente dalle $X_i$. Determinare $\E(Y)$.
+
+
+$Y=\sum_{i=1}^M X_i$ \\ $M \sim Pois(\beta)$. \\ Chiamiamo $\E(X_i) = p -\lambda + \lambda p = \mu$\\
+$\E(Y)=\sum_{m=1}^{\inf} \E[Y|M=m]P(M=m)$
+
+
+Data $M \sim Pois(\beta)$ allora $P(M=m) = \frac{\beta^m}{m!} e^{-\beta}$.\\
+Invece 
+\begin{align*}
+	&\E[Y|M=m] = \E[\sum_{i=1}^m] = \textit{ per linearità}\\
+	%ditemi voi se si capisce cosa intendo: "quello di sopra è uguale a quello di sotto per linearità"
+	& = \sum_{i=1}^m\E[X_i]=m\mu
+\end{align*}
+Quindi 
+\begin{align*}
+	\E[y] & = \sum_{m=1}^{\inf} m\mu \qquad \frac{\beta^m}{m!} e^{-\beta}=\\
+	      & = e^{-\beta} \mu \sum_{m=1}^{\inf} m\frac{\beta^m}{m!}=\\
+	      & = e^{-\beta} \mu \sum_{m=1}^{\inf} \frac{\beta^m}{(m-1)!}=\\
+	      & = \textit{ semplificando con Wolfram Alpha } =\\
+	      &=\beta \mu
+\end{align*}
+Questo esercizio poteva essere alternativamente risolto utilizzando il \textit{teorema della doppia attesa} e quindi ponendo 
+$\E(Y)=\E[\sum_{i=1}^{N}X_i]=\E[\E[\sum_{i=1}^{N}X_i|N]]$.\\
+Condizionando su $N$ e svolgendo i calcoli analogamente a quanto fatto in classe saremmo giunti alla seguente uguaglianza: %scritta così sembra che non abbiamo fatto i calcoli, invece li abbiamo fatti, come posso dirlo diversament %scritta così sembra che non abbiamo fatto i calcoli, invece li abbiamo fatti, come posso dirlo diversamente?
+$$\E[Y]=\E[\sum_{i=1}^{N}X_i]= \E[N] * \E[X] = \beta \mu$$
 \section{Esercizio 2}
 \section{Esercizio 3}
 \section{Esercizio 4}
