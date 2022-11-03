@@ -25,6 +25,8 @@
 \newtheorem*{definition}{Def}
 \usepackage{xcolor}
 \newcommand{\appunto}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\E}[0]{\mathbb{E}}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 
 
 \begin{document}
@@ -33,6 +35,41 @@
 \title{Risposte Foglio1}
 \maketitle
 \section{Esercizio 1}
+Sia $X$ una v.a che assume il valore $1$ con probabilità $p$ e $(-N)$ con probabilità $1 - p$. Qui $N$ è una v.a. di Poisson di parametro $\lambda$
+\begin{align}
+	X=
+	\begin{cases}
+		1 \qquad & p\\
+		-N \qquad & 1-p
+	\end{cases}
+\end{align}
+$$N \sim Pois(\lambda)$$ 
+\subsection{}
+\label{SEC:1.a}
+Determinare il valore di $\lambda$ per cui $\E(X) = 0$.\\
+Per il teorema dell'attesa totale, $\E[X] = \sum_{i=1}^n\E[X|A_i]P(A_i)$ con $A_1, ..., A_n$ eventi a due a due disgiunti che formano una partizione di E, possiamo affermare che
+\begin{align*}
+	\E[X] = & P(X=1) * E[1 | X=1] + P(X=-N)*\E[-N | X= -N]=\\
+%come abbiamo fatto sparire il condizionamento? v.a. indipendenti?
+	= & p + (1-p) * \E[-N]=\\
+	  & \text{\textit{essendo N $\sim$ Poisson($\lambda$) vale $\E[N] = \lambda$}}\\
+	= & p - \lambda(1-p) 
+\end{align*}
+$$\lambda = \frac{p}{1-p}$$
+\subsection{}
+Calcolare $Var(X)$.
+Usando la definizione di varianza, $Var(X) = \E[X^2] - \E[X]^2$  ed il valore dell'attesa calcolato in sezione~\ref{SEC:1.a}, scriviamo:
+\begin{equation}\label{var}Var(X) =  E[X^2] - [p - \lambda(1-p)]^2\end{equation} 
+Analogmantente al punto precedente si può calcolare $\E[X^2]$
+\begin{align*}
+	\E[X^2] &= p* \E[1^2] + (1-p)\E[(-N)^2]=\\
+	%ma glieli mettiamo tutti sti calcoli o li tiriamo via?
+		&= p + (1-p)(\lambda + \lambda^2)= p+\lambda +\lambda^2 -p\lambda - p\lambda^2 =\\
+		&= p(1-\lambda -\lambda^2) + \lambda(1+\lambda) 
+\end{align*}
+Sostituendo nella equazione\eqref{var}
+$$Var(X) =  p(1-\lambda -\lambda^2) + \lambda(1+\lambda) - (p - \lambda(1-p))^2 $$
+\subsection{}
 \section{Esercizio 2}
 \section{Esercizio 3}
 \section{Esercizio 4}
