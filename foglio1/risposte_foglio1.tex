@@ -21,6 +21,7 @@
 \usepackage{graphicx}
 \usepackage[italian]{babel}
 \usepackage{thmtools}
+\usepackage{mathtools}
 \graphicspath{{figures/}}
 \newtheorem*{definition}{Def}
 \usepackage{xcolor}
@@ -74,7 +75,7 @@ Sia $\{X_i\}i=1,2,...$ una successione di v.a. distribuite come $X$ e sia $Y = \
 
 
 $Y=\sum_{i=1}^M X_i$ \\ $M \sim Pois(\beta)$. \\ Chiamiamo $\E(X_i) = p -\lambda + \lambda p = \mu$\\
-$\E(Y)=\sum_{m=1}^{\inf} \E[Y|M=m]P(M=m)$
+$\E(Y)=\sum_{m=1}^{\infty} \E[Y|M=m]P(M=m)$
 
 
 Data $M \sim Pois(\beta)$ allora $P(M=m) = \frac{\beta^m}{m!} e^{-\beta}$.\\
@@ -86,17 +87,46 @@ Invece
 \end{align*}
 Quindi 
 \begin{align*}
-	\E[y] & = \sum_{m=1}^{\inf} m\mu \qquad \frac{\beta^m}{m!} e^{-\beta}=\\
-	      & = e^{-\beta} \mu \sum_{m=1}^{\inf} m\frac{\beta^m}{m!}=\\
-	      & = e^{-\beta} \mu \sum_{m=1}^{\inf} \frac{\beta^m}{(m-1)!}=\\
+	\E[y] & = \sum_{m=1}^{\infty} m\mu \qquad \frac{\beta^m}{m!} e^{-\beta}=\\
+	      & = e^{-\beta} \mu \sum_{m=1}^{\infty} m\frac{\beta^m}{m!}=\\
+	      & = e^{-\beta} \mu \sum_{m=1}^{\infty} \frac{\beta^m}{(m-1)!}=\\
 	      & = \textit{ semplificando con Wolfram Alpha } =\\
 	      &=\beta \mu
 \end{align*}
 Questo esercizio poteva essere alternativamente risolto utilizzando il \textit{teorema della doppia attesa} e quindi ponendo 
 $\E(Y)=\E[\sum_{i=1}^{N}X_i]=\E[\E[\sum_{i=1}^{N}X_i|N]]$.\\
-Condizionando su $N$ e svolgendo i calcoli analogamente a quanto fatto in classe saremmo giunti alla seguente uguaglianza: %scritta così sembra che non abbiamo fatto i calcoli, invece li abbiamo fatti, come posso dirlo diversament %scritta così sembra che non abbiamo fatto i calcoli, invece li abbiamo fatti, come posso dirlo diversamente?
+Condizionando su $N$ e svolgendo i calcoli analogamente a quanto fatto in classe saremmo giunti alla seguente uguaglianza: %scritta così sembra che non abbiamo fatto i calcoli, invece li abbiamo fatti, come posso dirlo diversamente?
 $$\E[Y]=\E[\sum_{i=1}^{N}X_i]= \E[N] * \E[X] = \beta \mu$$
 \section{Esercizio 2}
+Alla stazione di partenza di un treno salgono $K$ persone, con $K$ v.a. distribuita secondo Poisson, di parametro $\lambda = 100$. Il treno effettua un’unica fermata prima dell’arrivo a destinazione. Alla fermata ogni persona scende, con uguale probabilità $p$.
+
+
+\begin{align*}
+	&K \sim Pois(100) \qquad \qquad &X \sim Binom(K,p)\\
+	&f_K(k) = \frac{\lambda^k}{k!}e^{-\lambda} &f_X(x) = \binom{k}{x}p^x(1-p)^{k-x}\\
+	&\E(k) = \lambda=100 &\E(X) = kp
+\end{align*}
+Creiamo inoltre una nuova v.a. $Z = K-X$ che conta il numero di persone rimaste sul treno.
+\subsection{}
+Se nessun nuovo passeggero sale alla fermata intermedia, determinare la probabilità che il treno arrivi alla stazione di destinazione finale con almeno 90 passeggeri.
+
+Si sta cercando $P(Z \geq 90)$.
+\begin{align*}
+	f_Z(z)=& \sum_{k=0}^{\infty} \underbrace{P(k - X = z | K=k)}_{\binom{k}{k-z}p^{k-z}(1-p)^{z}} \underbrace{P(K=k)}_{\frac{\lambda^k}{k!}e^{-\lambda}} =\\
+	       =& \sum_{k=0}^{\infty} \frac{k!}{(k-z)! z!} p^{k-z}(1-p)^{z}\frac{\lambda^k}{k!}e^{-\lambda} = \\
+	       =& \textit{portando fuori dalla sommatoria i termini non correlati a k} =\\
+	       =& \frac{e^{-\lambda} (1-p)^z}{z!} \sum_{k=0}^{\infty} \frac{k!}{(k-z)!}p^{k-z}\frac{\lambda^k}{k!} = \frac{e^{-\lambda} (1-p)^z}{z!} \sum_{k=0}^{\infty} \frac{p^{k-z}\lambda^k}{(k-z)!} =\\
+	       =& \textit{moltiplicando e dividendo $\lambda^{k-z}$} =\\
+	       =& \frac{e^{-\lambda} (1-p)^z}{z!} \sum_{k=0}^{\infty} \frac{p^{k-z}\lambda^k}{(k-z)!} * \lambda^{k-z} \lambda^{z-k} =\\ 
+	       =&\frac{e^{-\lambda} (1-p)^z \lambda^z}{z!} \sum_{k=0}^{\infty} \frac{p^{k-z}\lambda^k \lambda^{k-z}}{(k-z)! \lambda^k} = \\
+	       =& \frac{e^{-\lambda} (1-p)^z \lambda^z}{z!} \underbrace{\sum_{k=0}^{\infty} \frac{(p\lambda)^{k-z}}{(k-z)!}}_{e^{p\lambda}}= \\ %c'è bisogno di spiegare perchè? 
+	       =& \frac{e^{p\lambda} e^{-\lambda} (1-p)^z \lambda^z}{z!} = e^{p\lambda - \lambda} \frac{(\lambda - \lambda p)^z}{z!} = Pois(\lambda - \lambda p)
+\end{align*}
+Quindi $F_Z(z) = \sum_{i=0}^{z} f_Z(i) = P(Z < z)$.\\
+$$ P(Z \geq 90) = 1 - P(Z < 90) = 1 - f_Z(89)$$
+
+\subsection{}
+
 \section{Esercizio 3}
 \section{Esercizio 4}
 \end{document}
