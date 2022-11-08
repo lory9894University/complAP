@@ -1,6 +1,9 @@
 \documentclass[a4paper]{article}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{qtree}
@@ -146,5 +149,101 @@ Supponendo che ogni passeggero salito alla fermata intermedia non scenda immedia
 Dalla sezione \ref{SEC:2.b} conosciamo $\E[Z] = 100 -100p$, quindi:
 $$\E[Z + M]= 100 -100p +50 = 150 - 100p$$
 \section{Esercizio 3}
+
+\subsection{} 
+Dimostriamo che 
+$$\E[X | X] + \E[Y | Y] = X + Y$$
+Si noti che per ogni v.a. Z si ha per definizione:
+\begin{align}
+	\E[Z | Z]=
+	\begin{cases}
+		\E[Z | Z = z_1] \qquad & P(Z=z_1)\\
+		\E[Z | Z = z_2] \qquad & P(Z=z_2)\\
+        \vdotswithin{} \notag \\
+		\E[Z | Z = z_n] \qquad & P(Z=z_n)\\
+	\end{cases}
+\end{align}
+Ma siccome:
+$$
+\E[Z | Z = z_1] = \E[z_1] = z_1
+$$
+Il sistema precedente si puó riscrivere come:
+\begin{align}
+	\E[Z | Z]=
+	\begin{cases}
+		z_1 \qquad & P(Z=z_1)\\
+		z_2 \qquad & P(Z=z_2)\\
+        \vdotswithin{} \notag \\
+		z_n \qquad & P(Z=z_n)\\
+	\end{cases}
+\end{align}
+Questa é la definizione di Z, pertanto siccome questo vale per tutte le v.a., vale anche per X e Y. \\
+Quindi vero.
+
+\subsection{}
+Dimostriamo 
+$$\E[X + Y | |X| = x] \ne x + Y$$
+Siccome l'attesa della somma é la somma delle attese (Linearitá dell'attesa condizionata):
+$$\E[X + Y | |X| = x] = \E[X||X| = x] + \E[Y | |X| = x]$$
+La prima attesa puó essere riscritta nel seguente modo separando i due casi possibili del valore assoluto:
+$$
+\E[X||X| = x] = x \frac{P(X= x)}{P(X= x) + P(X= -x)} - x \frac{P(X= -x)}{P(X= x) + P(X= -x)}=
+$$
+$$ = x\frac{f_X(x)-f_X(-x)}{f_X(x) + f_X(-x)}$$
+Siccome é quindi ovvio che tale risultato é diverso da $x$, vorremmo capire sotto quali ipotesi vale che 
+$$x = x\frac{f_X(x)-f_X(-x)}{f_X(x) + f_X(-x)}$$
+Svolgendo gli opportuni calcoli, si arriva trova che 
+$$\forall x < 0  \ \ \  f_X(x) = 0$$
+Sotto queste ipotesi, occorre solamente supporre che
+$$\E[Y||X| = x] = Y$$
+Questo é vero se $X$ e $Y$ sono indipendenti e $Y = \E[Y]$ \\
+Inoltre $Y = \E[Y]$ avviene sempre se per qualche $k$ 
+\begin{align*}
+	Y =
+	\begin{cases}
+		k \qquad & p = 1 
+	\end{cases}
+\end{align*}
+
+Quindi falso in generale. \\
+Ma 
+\begin{align*}
+\E[X + Y | |X| = x] = x + Y \iff
+	\begin{cases}
+        \text{X e Y sono Indipendenti} \\
+        \forall x < 0  \ \ \  f_X(x) = 0 \\
+        Y \text{ degenere}
+	\end{cases}
+\end{align*}
+
+
+\subsection{}
+Dimostriamo che 
+$$
+\E[X||X|] \ne \E[X | X] 
+$$
+
+Come visto al punto 3.a,  $\E[X | X] = X$, inoltre:
+\begin{align}
+	\E[X | |X|]=
+	\begin{cases}
+		\E[X | |X| = x_1] \qquad & P(|X|=x_1)\\
+		\E[X | |X| = x_2] \qquad & P(|X|=x_2)\\
+        \vdotswithin{} \notag \\
+		\E[X | |X| = x_n] \qquad & P(|X|=x_n)\\
+	\end{cases}
+\end{align}
+
+Tuttavia, come visto al punto 3.b, 
+$$\E[X | |X| = x] = x\frac{f_X(x)-f_X(-x)}{f_X(x) + f_X(-x)}$$
+Inoltre
+$$P(|X| = x) \ne P(X = x)$$
+
+Quindi falso. \\ 
+Per fare in modo che questa relazione diventi vera, dovremmo trovarci sotto le stesse ipotesi dell'esercizio precedente:
+$$
+\E[X||X|] = \E[X | X] \iff \forall x<0 \ \ \ f_X(x) = 0
+$$
+
 \section{Esercizio 4}
 \end{document}
