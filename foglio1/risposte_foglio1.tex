@@ -126,7 +126,25 @@ Quindi $F_Z(z) = \sum_{i=0}^{z} f_Z(i) = P(Z < z)$.\\
 $$ P(Z \geq 90) = 1 - P(Z < 90) = 1 - f_Z(89)$$
 
 \subsection{}
+\label{SEC:2.b}
+Se nessun nuovo passeggero sale alla fermata intermedia, determinare il numero medio di passeggeri presenti all’arrivo alla destinazione finale.
 
+Ricordiamo $\E[k] = k = 100$.\\
+\begin{align*}
+	\E[Z] &=[def] \E[K-X] = \E[K] - \E[X] \textit{ per linearità dell'attesa}\\
+	      &= 100 - \sum_{k=1}^{\infty} \E[X|K=k]f_K(k)= \textit{ data $X \sim Binom(k,p)$} = \\
+	      &= 100 - \sum_{k=1}^{\infty} \E[kp]f_K(k)= \textit{ essendo k e p due costanti} = \\
+	      &= 100 - \sum_{k=1}^{\infty} kpf_K(k)= 100 - p\sum_{k=1}^{\infty} kf_K(k)=
+\end{align*}
+Per definizione di attesa $ \sum_{k=1}^{\infty} kf_K(k)= \E[k] = \lambda = 100$
+$$ \E[Z] = 100 -100p$$
+\subsection{}
+Si supponga che alla fermata intermedia salga un numero $M$ di passeggeri, con $M$ v.a. indipendente da $K$, v.a. di Poisson di parametro $\beta = 50$. Si determini il numero medio di passeggeri che arriva alla destinazione finale.
+
+$M \sim Pois(\beta)$ con $\beta = 50$ quindi $\E(M) = 50$.\\
+Supponendo che ogni passeggero salito alla fermata intermedia non scenda immediatamente $\E[Z + M] = \E[Z] + E[M]$.
+Dalla sezione \ref{SEC:2.b} conosciamo $\E[Z] = 100 -100p$, quindi:
+$$\E[Z + M]= 100 -100p +50 = 150 - 100p$$
 \section{Esercizio 3}
 \section{Esercizio 4}
 \end{document}
