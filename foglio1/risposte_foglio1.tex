@@ -245,5 +245,75 @@ $$
 \E[X||X|] = \E[X | X] \iff \forall x<0 \ \ \ f_X(x) = 0
 $$
 
+\subsection{}
+Vogliamo mostrare che
+$$\E[g(X)h(Y) | X] = g(X)\E[h(Y) | X]$$
+Per fare ció dobbiamo avvalerci di alcune osservazioni vere quando X e Y sono indipendenti.\\
+In particolare abbiamo che:
+$$\E[g(X)h(Y) | X] = \E[g(X) | X] \E[h(Y) | X]$$
+
+Ma come visto al punto 3.a (principio di stabilitá attesa condizionata):
+$$
+\E[g(X) | X] = g(X)
+$$
+Quindi abbiamo trovato ció che volevamo mostrare ma sotto le condizioni che X e Y siano indipendenti. \\
+Quindi:
+$$
+\E[g(X)h(Y) | X] = g(X)\E[h(Y) | X] \iff X \text{ e } Y \text{ indipendenti}
+$$
+
+\subsection{}
+Vogliamo mostrare che:
+$$
+\E[g(X)h(Y) | X = x \ Y = y] = g(x)h(y)
+$$
+Siccome abbiamo giá una informazione sui valori assunti dalla X e dalla Y, possiamo sostituire e trovare che:
+$$
+\E[g(x)h(y)] = g(x)h(y)
+$$
+Questo perché $g(x)h(y)$ é una costante e per ogni costante $k$ abbiamo:
+$$
+\E[k] = k
+$$
+Quindi ció che volevamo mostrare é vero.
+
+\subsection{}
+Vogliamo mostrare che:
+$$
+X \text{ e } Y \text{ sono v.a. Gaussiane Indipendenti} \implies \E[XY | X] = XY
+$$
+Iniziamo a scomporre l'attesa del prodotto nel prodotto delle attese. Si puó fare perché X e Y sono indipendenti:
+$$
+\E[XY | X] = \E[X | X]\E[Y | X]
+$$
+Ma come visto prima:
+$$
+\E[X | X] = X
+$$
+Non resta che capire cos'é $\E[Y | X]$, seguendo la definizione abbiamo che:
+\begin{align}
+	\E[Y | X]=
+	\begin{cases}
+		\E[Y | X = x_1] \qquad & P(X=x_1)\\
+		\E[Y | X = x_2] \qquad & P(X=x_2)\\
+        \vdotswithin{} \notag \\
+		\E[Y | X = x_n] \qquad & P(X=x_n)\\
+	\end{cases}
+\end{align}
+
+Ma $\E[Y | X = x_1] = \E[Y]$ perché $X$ e $Y$ sono indipendenti.\\
+Quindi:
+\begin{align}
+	\E[Y | X]=
+	\begin{cases}
+		\E[Y] \qquad & P(X=x_1)\\
+		\E[Y] \qquad & P(X=x_2)\\
+        \vdotswithin{} \notag \\
+		\E[Y] \qquad & P(X=x_n)\\
+	\end{cases}
+\end{align}
+Questo é evidentemente diverso da $Y$ anche sotto le ipotesi fornite dal problema.\\
+Occorre aggiungere nuovamente l'ipotesi in cui Y é una v.a. degenere che assume il valore k con probabilitá 1.\\
+Tuttavia questo non é possibile in quanto $Y$ é una gaussiana per ipotesi.
 \section{Esercizio 4}
 \end{document}
