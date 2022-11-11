@@ -34,7 +34,7 @@
 
 \begin{document}
 
-\author{Giulia Coucorde ,\\ Andrea Cacioli 914501 andrea.cacioli@edu.unito.it,\\ Lorenzo Dentis 914833 lorenzo.dentis@edu.unito.it}
+\author{Giulia Coucorde 802321 giulia.coucourde@edu.unito.it,\\ Andrea Cacioli 914501 andrea.cacioli@edu.unito.it,\\ Lorenzo Dentis 914833 lorenzo.dentis@edu.unito.it}
 \title{Risposte Foglio1}
 \maketitle
 \section{Esercizio 1}
@@ -315,4 +315,82 @@ Questo é evidentemente diverso da $Y$ anche sotto le ipotesi fornite dal proble
 Occorre aggiungere nuovamente l'ipotesi in cui Y é una v.a. degenere che assume il valore k con probabilitá 1.\\
 Tuttavia questo non é possibile in quanto $Y$ é una gaussiana per ipotesi.
 \section{Esercizio 4}
+Siano X e Y v.a congiuntamente gaussiane con media $\mu_X$ e $\mu_Y$ e varianza  $\sigma^2_X$ e $\sigma^2_Y$, rispettivamente e covarianza $C_{XY}$
+\subsection{}
+$$X,Y \sim \mathcal{N}(\mu,\delta^2 )$$
+Vogliamo determinare la densità di probabilità condizionale $X + Y$ dato $Y = y$
+$$
+f_{X+Y|Y=y}(z)\stackrel{def}{=}P(X+Y=z | Y=y)
+$$
+Supponendo che ($X$,$Y$) sia gaussiana bivariata:\\
+assumo $Cov_{XY}=0$ \\
+$$
+Cov_{XY}=0 \iff X, Y \text{indipendenti}
+$$
+Quindi\\
+
+Sia $Z = X + Y$
+$$
+F_Z(z)=P(X+Y\le z)
+$$
+$$
+\underset{\mathbb{R}}{\int}P(X+Y\le z|Y=y)f_Y(y)dy
+$$
+
+Ma per l'indipendenza di $X$ e $Y$
+\begin{align*}
+    &\underset{\mathbb{R}}{\int}P(X+Y\le z|Y=y)f_Y(y)dy\\
+    =&\underset{\mathbb{R}}{\int}P(X+Y\le z)f_Y(y)dy \\
+    =&\underset{\mathbb{R}}{\int}P(X < z - y )f_Y(y)dy \\
+    =&\underset{\mathbb{R}}{\int}F_X(z - y)f_Y(y)dy
+\end{align*}
+
+Per la formula della derivazione di una funzione integrale
+$$
+f_Z(z) = \underset{\mathbb{R}}{\int}f_X(z-y)f_Y(y)dy
+$$
+
+Siccome $X$ e $Y$ sono v.a. normali
+
+$$
+f_X(x)=\frac{-|x- \mu_X|}{2\sigma_X} \text { e } f_Y(y)=\frac{-|y- \mu_Y|}{2\sigma_Y}
+$$
+Quindi
+$$
+f_Z(z) = \underset{\mathbb{R}}{\int}-\frac{|z-y- \mu_X|}{2\sigma_X}\cdot-\frac{|y- \mu_Y|}{2\sigma_Y}dy
+$$
+Per quanto riguarda v.a. indipendenti con distribuzione normale, si può dimostrare che anche la loro somma è una normale:
+
+$$
+\mathcal{N}(\mu_X + \mu_Y, \sigma_X + \sigma_Y)
+$$
+
+(Wikipedia: Sum of normally distributed random variables)
+
+\subsection{}
+Determinare $$\E[X^2 + Y^2 |X = x \quad Y = y]$$
+
+Se $X$ e $Y$ sono indipendenti
+$$
+\E[X^2|X=x] + E[Y^2|Y=y] =
+\E[X^2] + E[Y^2]
+$$
+Dato che $X=x$ e $Y=y$
+$$
+X^2 + Y^2 = x^2 + y^2
+$$
+\subsection{}
+Determinare $\E[X|Y=y]$ \\
+Descrizione del problema:
+$$
+\E[X|Y=y]\stackrel{def}{=}\underset{\mathbb{R}}{\int}f_{X|Y}(x,y)dx
+$$
+Ma
+$$
+f_{X|Y}(x,y) = \int_{-\infty}^{x}\frac{f_{XY}(v,y)}{f_X(y)}dv
+$$
+Cercando materiale aggiuntivo abbiamo trovato la seguente formula per la possibile risoluzione del problema:
+$$
+\E[X|X_2=x_2] = \mu_{1}+\rho\frac{\sigma_1}{\sigma_2}(x_2-\mu_2)
+$$
 \end{document}
