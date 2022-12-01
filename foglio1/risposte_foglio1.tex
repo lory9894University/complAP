@@ -34,7 +34,7 @@
 
 \begin{document}
 
-\author{Giulia Coucorde 802321 giulia.coucourde@edu.unito.it,\\ Andrea Cacioli 914501 andrea.cacioli@edu.unito.it,\\ Lorenzo Dentis 914833 lorenzo.dentis@edu.unito.it}
+\author{Giulia Coucourde 802321 giulia.coucourde@edu.unito.it,\\ Andrea Cacioli 914501 andrea.cacioli@edu.unito.it,\\ Lorenzo Dentis 914833 lorenzo.dentis@edu.unito.it}
 \title{Risposte Foglio1}
 \maketitle
 \section{Esercizio 1}
@@ -247,8 +247,9 @@ $$
 \subsection{}
 Vogliamo mostrare che
 $$\E[g(X)h(Y) | X] = g(X)\E[h(Y) | X]$$
-Per fare ció dobbiamo avvalerci di alcune osservazioni vere quando X e Y sono indipendenti.\\
-In particolare abbiamo che:
+Per fare ció dobbiamo supporre l'indipendenza di $X$ e $Y$ per avvalerci di una proprietà dell'attesa applicabile solo sotto questa ipotesi.\\
+Date due v.a. X e Y indipendenti $\E[XY]= \E[X]\E[Y]$\\
+In particolare abbiamo che per una qualsiasi funzione $g$ e $h$:
 $$\E[g(X)h(Y) | X] = \E[g(X) | X] \E[h(Y) | X]$$
 
 Ma come visto al punto 3.a (principio di stabilitá attesa condizionata):
@@ -370,14 +371,13 @@ $$
 \subsection{}
 Determinare $$\E[X^2 + Y^2 |X = x \quad Y = y]$$
 
-Se $X$ e $Y$ sono indipendenti
-$$
-\E[X^2|X=x] + E[Y^2|Y=y] =
-\E[X^2] + E[Y^2]
-$$
 Dato che $X=x$ e $Y=y$
 $$
 X^2 + Y^2 = x^2 + y^2
+$$
+E quindi:
+$$
+\E[X^2 + Y^2] = \E[x^2 + y^2] =x^2 + y^2 
 $$
 \subsection{}
 Determinare $\E[X|Y=y]$ \\
