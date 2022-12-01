@@ -80,4 +80,23 @@ $$P=\left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ 
 		\end{align*}
 \end{itemize}
 \section{Esercizio 4}
+Si considerino due distinte code di tipo M/M/1 (code in cui i clienti arrivino secondo un processo di Poisson e vengano serviti da un unico servitore con tempi di servizio esponenziali).
+Si supponga che nella prima coda il processo di Poisson abbia parametro $\lambda_1$ , mentre nella seconda abbia parametro $\lambda_2$ ; inoltre il tempo di servizio sia analogo per le due code, con tempo medio di servizio $\mu$. Si supponga $\lambda_1 < \lambda_2 < \mu$
+\subsection{}
+Si puó affermare che in ogni istante ci saranno sicuramente meno clienti in attesa nella prima coda?
+No, non lo si può affermare, in quanto si possono trovare 3 controesempi:\\
+Il primo controesempio è la situazione in cui non c'è alcun cliente in coda ed arriva un cliente prima prima coda che nella seconda, cosa comunque possibile nonostante $\lambda_1 < \lambda_2$.\\
+Più interessante è la situazione in cui entrambe le code hanno $n$ clienti. 
+\begin{center}\makebox[0cm]{\includegraphics[scale=0.3]{code.png}}\end{center}
+In questo caso ci sono due situazioni in cui la prima coda ha più clienti in attesa della seconda, se un cliente arriva nella coda 1 ($P_{\lambda_1}$), o se un cliente esce dalla coda 2 ($P_\mu$).
+\subsection{}
+Si puó affermare che in media ci saranno meno clienti nella coda 1? Giustificare la risposta.
+Si, in media ci saranno meno clienti nella prima coda. Tra le proprietà della coda M|M|1 vi è una proprietà che, sotto la condizione $\lambda < \mu$, permette di calcolare il numero medio di persone in coda.
+\begin{align*}
+	&\text{posto } \lambda < \mu \text{ e creando un nuovo parametro } \rho = \frac{\lambda}{\mu} \\
+	&\text{Il numero medio di utenti in coda è } L_{q}=\sum_{k=1}^{\infty}{(k-1)\pi_{i}}=\frac{\rho^{2}}{1-\rho}
+\end{align*}
+Nel caso dell'esercizio $\lambda_1 < \lambda_2$ e $\mu$ uguale per le due code quindi\\ $\rho_1 = \frac{\lambda_1}{\mu} < \rho_2 = \frac{\lambda_2}{\mu}$
+$$L_{q1} = \frac{\rho_1^{2}}{1-\rho_1} < L_{q2} = \frac{\rho_2^{2}}{1-\rho_2}$$
+Si può quindi affermare che in media la coda 2 avrà più clienti della coda 1.
 \end{document}
