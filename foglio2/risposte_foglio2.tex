@@ -55,7 +55,7 @@ $$P=\left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ 
 	\item Determinare $lim_{n \rightarrow \infty}P^n$
 		Per ottenere la distribuzione limite possiamo utilizzare il teorema presentato in classe. La catena $P$ è irreducibile (dimostrato al punto 1) ed Ergodica, questo perchè tutti gli stati sono aperiodici e la catena è irreducibile, quindi sappiamo:
 		\begin{enumerate}
-			\item esiste $lim_{n \rightarrow \infty}P^n_{ij}=\Pi_j$
+			\item esiste $lim_{n\rightarrow\infty}P^n_{ij}=\Pi_j$
 			\item $\Pi_j$ è l'unica soluzione del seguente sistema: 
 				\begin{equation*}
 					\begin{cases} \Pi_j = \sum_i \Pi_j P_{ij}\\
@@ -79,6 +79,61 @@ $$P=\left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ 
 			\end{cases}
 		\end{align*}
 \end{itemize}
+\section{Esercizio 3}
+Si considerino due processi di Poisson, indipendenti $N_1(t)$ e $ N_2(t)$ di parametri $\mu_1$ e $\mu_2$ , rispettivamente.
+\subsection{}
+Si determini la distribuzione degli intertempi del processo $M (t) = N_1 (t) + N_2 (t)$
+Siano $E_1$ ed $E_2$ gli intertempi rispettivamente del processo $M_1$ ed $M_2$.\\
+L' unico modo per ottenere un intertempo di $M$ di durata $\leq x$ è che $E_1 \leq x \wedge E_2 \geq x$ oppure $E_2 \leq x \wedge E_1 \geq x$.
+Per cui la distribuzione di $E$ (intertempo di $M$) è:
+\begin{align*}
+	P(E \leq x) =& P(E_1 \leq x) P(E_2 \geq x) + P(E_1 \leq x)P(E_2 \geq x)=\\
+	=&2 * (1-e^{-\lambda x}) * e^{-\lambda x}=\\
+	=& 2 * (e^{-\lambda x} - e^{-2\lambda x})
+\end{align*}
+
+\subsection{}
+Determinare la distribuzione condizionale di $N_1 (t)$ dato $ M (t) = 1$
+$$P(N_1 = 1 | M = 1) = P (N_1 = 1 | N_1 + N_2 = 1)$$
+Le condizioni necessarie per cui questo si verifichi sono le seguenti:
+$$N_1 = 1 \wedge N_2 = 0$$
+ma 
+$$N_1 ~ Pois(\mu_1) \qquad N_2 ~ Pois(\mu_2)$$
+per indipendenza delle due distribuzioni:
+\begin{align*}
+	&P(N_1 = 1) * P(N_2 = 0) = \\
+	&\frac{\mu_1^1}{1!}*e^{-\mu_1}\frac{\mu_2^0}{0!}*e^{-\mu_2}=\\
+	&= \mu_1*e^{-\mu_1}e^{-\mu_2}= \mu_1*e^{-\mu_1-\mu_2}
+\end{align*}
+
+\subsection{}
+Si suggerisca un metodo per simulare una traiettoria di $M (t)$ fino al tempo $ t = 10$ avendo giá a disposizione la simulazione di una traiettoria di $ N1 (t) $ fino al tempo $ t = 11$\\
+
+Simulo variabili aleatorie esponenziali di parametro {{aspetta la risposta della prof}} finché la somma di tutte é $\leq 10$.
+A questo punto ho una traccia di $N_2$ fino a 10 e la sommo con la traccia fornitami di $N_1$ fino a 10.
+In questo modo ho una possibile traccia di $M$.
+
+\section{Esercizio 3}
+Sei schermi vengono controllati simultaneamente. Ciascuno ha una durata in vita esponenziale di parametri $\lambda_i , i = 1, .., 6$, indipendentemente uno dall’altro
+\subsection{}
+Quanto tempo si deve attendere prima che se ne guasti uno? Si fornisca la distribuzione e il suo valore atteso. Quanto tempo si deve attendere prima che ce ne siano 2 guasti? Si fornisca la distribuzione e il suo valore atteso.
+Possiamo considerare i tempi prima che un teleschermo si rompa come degli intertempi del processo di Poisson che conta il numero di rotture nel sistema dei teleschermi.
+Siccome siamo in un processo di Poisson, gli intertempi sono esponenziali indipendenti
+Per trovare il minimo in un insieme di esponenziali indipendenti identicamente distribuiti uso la seguente formula:
+$$min\{exp_i\}= \frac{\lambda}{n \lambda}$$
+Ma non essendo identicamente distribuiti, la formula diventa:
+$$min\{exp_i\}= \frac{\lambda_{min}}{\sum_1^n \lambda_i}$$
+
+Per trovare il secondo minimo utilizzo la stessa formula ma con al numeratore:  
+$$min(\{exp_i\}\setminus \{\lambda_{min}\}) $$
+\subsection{}
+Quanto tempo si deve attendere prima che si rompano tutti? Si fornisca la distribuzione e il valore atteso.\\
+
+La probabilità che tutti si siano rotti è equivalente a trovare la probabilità che l'ultimo si sia rotto (quello con il tempo più alto di tutti), quindi:
+$$min\{exp_i\}= \frac{\lambda_{max}}{\sum_1^n \lambda_i}$$
+
+
+
 \section{Esercizio 4}
 Si considerino due distinte code di tipo M/M/1 (code in cui i clienti arrivino secondo un processo di Poisson e vengano serviti da un unico servitore con tempi di servizio esponenziali).
 Si supponga che nella prima coda il processo di Poisson abbia parametro $\lambda_1$ , mentre nella seconda abbia parametro $\lambda_2$ ; inoltre il tempo di servizio sia analogo per le due code, con tempo medio di servizio $\mu$. Si supponga $\lambda_1 < \lambda_2 < \mu$
