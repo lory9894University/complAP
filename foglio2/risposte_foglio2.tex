@@ -52,7 +52,7 @@ $$P=\left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ 
 		$$P^2=P*P= \left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ {{\frac{3}{4}}}&{{0}}&{{\frac{1}{4}}}\\ {{0}}&{{1}}&{{0}}\end{array}\right) *
 		\left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{4}}}\\ {{\frac{3}{4}}}&{{0}}&{{\frac{1}{4}}}\\ {{0}}&{{1}}&{{0}}\end{array}\right)
 		= \left(\begin{array}{c c c}{{\frac{1}{2}}}&{{\frac{1}{3}}}&{{\frac{1}{6}}}\\ {{\frac{3}{8}}}&{{\frac{1}{2}}}&{{\frac{1}{8}}}\\ {{\frac{3}{4}}}&{{0}}&{{\frac{1}{4}}}\end{array}\right) $$
-	\item Determinare $lim_{n \rightarrow \infty}P^n$
+	\item Determinare $lim_{n \rightarrow \infty}P^n$\\
 		Per ottenere la distribuzione limite possiamo utilizzare il teorema presentato in classe. La catena $P$ è irreducibile (dimostrato al punto 1) ed Ergodica, questo perchè tutti gli stati sono aperiodici e la catena è irreducibile, quindi sappiamo:
 		\begin{enumerate}
 			\item esiste $lim_{n\rightarrow\infty}P^n_{ij}=\Pi_j$
@@ -87,7 +87,7 @@ Siano $E_1$ ed $E_2$ gli intertempi rispettivamente del processo $M_1$ ed $M_2$.
 L' unico modo per ottenere un intertempo di $M$ di durata $\leq x$ è che $E_1 \leq x \wedge E_2 \geq x$ oppure $E_2 \leq x \wedge E_1 \geq x$.
 Per cui la distribuzione di $E$ (intertempo di $M$) è:
 \begin{align*}
-	P(E \leq x) =& P(E_1 \leq x) P(E_2 \geq x) + P(E_1 \leq x)P(E_2 \geq x)=\\
+	P(E \leq x) =& P(E_1 \leq x) P(E_2 \geq x) + P(E_2 \leq x)P(E_1 \geq x)=\\
 	=&2 * (1-e^{-\lambda x}) * e^{-\lambda x}=\\
 	=& 2 * (e^{-\lambda x} - e^{-2\lambda x})
 \end{align*}
@@ -98,7 +98,7 @@ $$P(N_1 = 1 | M = 1) = P (N_1 = 1 | N_1 + N_2 = 1)$$
 Le condizioni necessarie per cui questo si verifichi sono le seguenti:
 $$N_1 = 1 \wedge N_2 = 0$$
 ma 
-$$N_1 ~ Pois(\mu_1) \qquad N_2 ~ Pois(\mu_2)$$
+$$N_1 \sim Pois(\mu_1) \qquad N_2 \sim Pois(\mu_2)$$
 per indipendenza delle due distribuzioni:
 \begin{align*}
 	&P(N_1 = 1) * P(N_2 = 0) = \\
@@ -118,7 +118,7 @@ Sei schermi vengono controllati simultaneamente. Ciascuno ha una durata in vita 
 \subsection{}
 Quanto tempo si deve attendere prima che se ne guasti uno? Si fornisca la distribuzione e il suo valore atteso. Quanto tempo si deve attendere prima che ce ne siano 2 guasti? Si fornisca la distribuzione e il suo valore atteso.
 Possiamo considerare i tempi prima che un teleschermo si rompa come degli intertempi del processo di Poisson che conta il numero di rotture nel sistema dei teleschermi.
-Siccome siamo in un processo di Poisson, gli intertempi sono esponenziali indipendenti
+Siccome siamo in un processo di Poisson, gli intertempi sono esponenziali indipendenti.\\
 Per trovare il minimo in un insieme di esponenziali indipendenti identicamente distribuiti uso la seguente formula:
 $$min\{exp_i\}= \frac{\lambda}{n \lambda}$$
 Ma non essendo identicamente distribuiti, la formula diventa:
@@ -135,21 +135,22 @@ $$min\{exp_i\}= \frac{\lambda_{max}}{\sum_1^n \lambda_i}$$
 
 
 
+
 \section{Esercizio 4}
 Si considerino due distinte code di tipo M/M/1 (code in cui i clienti arrivino secondo un processo di Poisson e vengano serviti da un unico servitore con tempi di servizio esponenziali).
 Si supponga che nella prima coda il processo di Poisson abbia parametro $\lambda_1$ , mentre nella seconda abbia parametro $\lambda_2$ ; inoltre il tempo di servizio sia analogo per le due code, con tempo medio di servizio $\mu$. Si supponga $\lambda_1 < \lambda_2 < \mu$
 \subsection{}
-Si puó affermare che in ogni istante ci saranno sicuramente meno clienti in attesa nella prima coda?
+Si puó affermare che in ogni istante ci saranno sicuramente meno clienti in attesa nella prima coda?\\
 No, non lo si può affermare, in quanto si possono trovare 3 controesempi:\\
-Il primo controesempio è la situazione in cui non c'è alcun cliente in coda ed arriva un cliente prima prima coda che nella seconda, cosa comunque possibile nonostante $\lambda_1 < \lambda_2$.\\
+Il primo controesempio è la situazione in cui non c'è alcun cliente in coda ed arriva un cliente prima nella prima coda che nella seconda, cosa comunque possibile nonostante $\lambda_1 < \lambda_2$.\\
 Più interessante è la situazione in cui entrambe le code hanno $n$ clienti. 
 \begin{center}\makebox[0cm]{\includegraphics[scale=0.3]{code.png}}\end{center}
 In questo caso ci sono due situazioni in cui la prima coda ha più clienti in attesa della seconda, se un cliente arriva nella coda 1 ($P_{\lambda_1}$), o se un cliente esce dalla coda 2 ($P_\mu$).
 \subsection{}
-Si puó affermare che in media ci saranno meno clienti nella coda 1? Giustificare la risposta.
-Si, in media ci saranno meno clienti nella prima coda. Tra le proprietà della coda M|M|1 vi è una proprietà che, sotto la condizione $\lambda < \mu$, permette di calcolare il numero medio di persone in coda.
+Si puó affermare che in media ci saranno meno clienti nella coda 1? Giustificare la risposta.\\
+Sì, in media ci saranno meno clienti nella prima coda. Tra le proprietà della coda M|M|1 vi è una proprietà che, sotto la condizione $\lambda < \mu$, permette di calcolare il numero medio di persone in coda.
 \begin{align*}
-	&\text{posto } \lambda < \mu \text{ e creando un nuovo parametro } \rho = \frac{\lambda}{\mu} \\
+	&\text{posto } \lambda < \mu \text{, sia } \rho = \frac{\lambda}{\mu} \\
 	&\text{Il numero medio di utenti in coda è } L_{q}=\sum_{k=1}^{\infty}{(k-1)\pi_{i}}=\frac{\rho^{2}}{1-\rho}
 \end{align*}
 Nel caso dell'esercizio $\lambda_1 < \lambda_2$ e $\mu$ uguale per le due code quindi\\ $\rho_1 = \frac{\lambda_1}{\mu} < \rho_2 = \frac{\lambda_2}{\mu}$
