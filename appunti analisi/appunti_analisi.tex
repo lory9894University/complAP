@@ -33,6 +33,8 @@
 \author{Lorenzo Dentis, lorenzo.dentis@edu.unito.it}
 \title{Appunti di Analisi}
 \maketitle
+\tableofcontents
+\newpage
 \section{Numeri Complessi}
 \subsection{definizione}
 \begin{definition}
@@ -50,21 +52,26 @@ Un numero complesso può essere anche scritto in forma algebrica $z= x+iy$.
 \end{definition}
 \subsection{proprietà}
 Essendo un numero complesso una coppia di numeri reali, si può affermare $\mathbb{C} = \mathbb{R}^2$?\\
-Sì,no,sì.\\ 
-Insiemisticamente sono uguali \appunto{tanto che spesso si rappresentano i numeri immaginari sul piano di Gauss (piano complesso)} , $z$ è un punto in $\R^2$ di coordinate $(x,y)$
-Algebricamente non sono uguali, in quanto il prodotto mostrato in $\mathbb{C}$ non è presente in $\mathbb{R}^2$.\\
+Sì,no,sì. 
+\begin{itemize}
+	\item Insiemisticamente sono uguali \appunto{tanto che spesso si rappresentano i numeri immaginari sul piano di Gauss (piano complesso)} , $z$ è un punto in $\R^2$ di coordinate $(x,y)$
+	\item Algebricamente non sono uguali, in quanto il prodotto mostrato in $\mathbb{C}$ non è presente in $\mathbb{R}^2$.
 La somma corrisponde alla somma di vettori in $\R^2$ ma il prodotto non ha corrispondenza.
-\appunto{il prodotto vettoriale è  completamente diverso in $\mathbb{R}^2$.}\\
-Topologicamente sono uguali, dato un numero complesso $z$, $||z|| = \sqrt{x^2 + y^2}$ chiamata \textit{norma} o \textit{modulo} di $z$. \appunto{cioè la stessa cosa del vettore di coordinate $(x,y) \in \R^2$}.
+\appunto{il prodotto vettoriale è  completamente diverso in $\mathbb{R}^2$.}
+	\item Topologicamente sono uguali, dato un numero complesso $z$, $||z|| = \sqrt{x^2 + y^2}$ chiamata \textit{norma} o \textit{modulo} di $z$. \appunto{cioè la stessa cosa della norma del vettore di coordinate $(x,y) \in \R^2$}.
 Da cui deriva che la "distanza" tra due numeri complessi $z,w$ è, \appunto{come in $\R^2$}, $dist(z,w)=||z-w|| = \sqrt{(x_z - x_w)^2 + (y_z - y_w)^2}$
 
+\end{itemize}
 Nota: il prodotto fornisce anche una giustificazione alle proprietà dell' \textit{unità immaginaria}
 \begin{definition}
 	$i=(0,1)$ è detta \textit{unità immaginaria} e verifica formalmente $i^2 =1$
 \end{definition}
 Infatti $i^2=(0,1)^2 = (0,1)(0,1) = (0*0 -1*1,0*1, 1 *0) = (-1,0) = 1$
-
 \subsection{Altre forme di scrittura}
+\begin{align*}
+	Z=(x,y) = x+iy = \rho(cos\theta + i sen\theta)=\rho e^{i\theta}\\
+	\text{[algebrica]}\quad \text{[alg. in modo trig]}\quad \text{[esponenziale]}
+\end{align*}
 \subsubsection{Trigonometrica}
 Rappresentando sul piano complesso un numero complesso $z$ notiamo che si può esprimere la sua "posizione" anche in coordinate polari.\\
 \begin{figure}[H]
@@ -88,7 +95,7 @@ Rappresentando sul piano complesso un numero complesso $z$ notiamo che si può e
 	\end{subfigure}
 \end{figure}
 $$ z=x + iy = \rho\, cos \theta + i\,\rho \, sin \theta = \rho (cos\theta + i\,sin \theta)$$
-Chiamiamo questo modo di esprimere un numero complesso "formai algebrica scritta in modo trigonometrico"
+Chiamiamo questo modo di esprimere un numero complesso "forma algebrica scritta in modo trigonometrico"
 
 \subsubsection{Esponenzionale}
 \begin{definition}[Formula di De Moivre]
@@ -96,12 +103,13 @@ Chiamiamo questo modo di esprimere un numero complesso "formai algebrica scritta
 \end{definition}
 Dunque
 $$ z = \rho (cos \theta + sen \theta)=  \rho e^{i \theta}$$
-\begin{definition}[Esponenziale complesso]
-	In generale, sia $z = (x,y)$
+\begin{definition}[Esponenziale complesso]\appunto{poco importante}\\
+	$$\text{In generale, sia } z = (x,y)$$
 	$$e^z = e^xe^{iy}=e^x(cos\,y + i \, sen\,x)$$
 \end{definition}
 La forma esponenziale permette di svolgere calcoli in maniera più semplice (soprattuto moltiplicazioni e potenze). 
-\subsubsection{note}
+\subsubsection{note} 
+\appunto{poco importanti}\\
 Equivalenza tra la scrittura in forme algebrica e la scrittura come coppia di numeri reali.\\
 $x = (x,0)\; y=(y,0),\; i=(0,1)$\\ 
 $x+iy = (x,0) + (0,1)*(y,0) = (x,0) + (0*y - 1*0, 0*0 + 1*y ) = (x,0) + (0,y) = (x,y)$
@@ -126,7 +134,7 @@ quindi può essere "scomposta": $f(t) = f_1(t) + i\,f_2(t)$.
 \begin{figure}[H]
 	\begin{subfigure}[c]{0.5\textwidth}
 	\includegraphics[width=\textwidth]{heavyside_func.png}
-	\end{subfigure}
+\end{subfigure}
 	\begin{subfigure}[c]{0.5\textwidth}
 		\begin{equation*}
 			\mu(t) = 
@@ -171,10 +179,36 @@ $$x(t) = \alpha (cos(\omega t + \phi) + i \; sen ( \omega t + \phi)) = \alpha e^
 
 \subsection{Sistemi}
 \begin{definition}[Transmission system]
-	Un "apparato" che riceve un segnale in input e trasmette un segnali in output. Indicato come $y=A(x)$ o in breve $y=Ax$.
+	Un "apparato" che riceve un segnale in input e trasmette un segnali in output.\\ Indicato come $y=A(x)$ o in breve $y=Ax$.
 \end{definition}
-esempi di semplici sistemi sono: l'amplificatore $y(t) = kx(t)$ con $k$ costante , delayer $y(t) = x(t-a)$ con $a$ costante o il "derivatore" $y(t) = x'(t)$
+I sistemi manipolano segnali, quindi prendono in input una funzione e restituiscono in output una differente funzione.
+Esempi di semplici sistemi sono: l'amplificatore $y(t) = kx(t)$ con $k$ costante , delayer $y(t) = x(t-a)$ con $a$ costante o il "derivatore" $y(t) = x'(t)$
 
 \subsubsection{proprietà dei sistemi}
+I sistemi possono avere diverse proprietà, quelle che interessano a noi (poichè vanno a definire un \textit{filtro}) sono:
+\begin{enumerate}
+	\item Linearità: Dato $A: X \rightarrow Y$ $A$ è lineare se:
+		$$A(x + y) = A(x) + A(y)$$
+		$$A(\lambda x) = \lambda A(x)$$
+	\appunto{nota che la seconda condizione deriva in realtà dalla prima}
+	\item Causalità: Non può "anticipare i tempi", l'output non può variare prima che vari l'input.
+		Formalmente: 
+		$$ x_1(t) = x_2(t)\: for \: t<t_0 \Rightarrow Ax_1(t) = Ax_2(t)\: for \: t<t_0 $$
+		\appunto{un filtro non deve per forza essere causale, ma per essere realizzabile deve esserlo}
+	\item Invarianza alle traslazioni: detta anche "stazionarietà", se traslo temporalmente l'input di $\alpha$ l'output uscirà temporalmente traslato di $\alpha$. 
+		Formalmente:
+		$$ A(\tau_a x) = \tau_a (Ax)$$
+		$\tau$ è un sistema, \textit{delay operator}. Si potrebbe anche scrivere:
+		$$ x(t) \rightarrow y(t) \Rightarrow x(t-a) \rightarrow y(t-a)$$
+	\item Continuità: Se se segnali di input sono "vicini" allora i due segnali di output sono "vicini" anch'essi. 
+		È riferita alle norme che approfondiremo nel capitolo dopo \ref{section:norme}
+\end{enumerate}
+\begin{definition}
+	Un \textbf{filtro} è un sistema che rispetta le proprietà 1,3,4. Un sistema che rispetta anche la proprietà 2 è detto \textbf{Filtro causale}.
+\end{definition}
+\subsubsection{Norme}
+\label{section:norme}
+Abbiamo già citato due volte il discorso di norma, ma cosa vuol dire la norma in \C ?
+
 
 \end{document}
