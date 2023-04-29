@@ -3,7 +3,6 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{listings}
-\usepackage{qtree}
 \usepackage{xcolor}
 \usepackage{forest}
 \usepackage{multicol}
@@ -201,14 +200,33 @@ I sistemi possono avere diverse proprietà, quelle che interessano a noi (poich�
 		$\tau$ è un sistema, \textit{delay operator}. Si potrebbe anche scrivere:
 		$$ x(t) \rightarrow y(t) \Rightarrow x(t-a) \rightarrow y(t-a)$$
 	\item Continuità: Se se segnali di input sono "vicini" allora i due segnali di output sono "vicini" anch'essi. 
-		È riferita alle norme che approfondiremo nel capitolo dopo \ref{section:norme}
+		Quando la sequenza di segnali in input $x_n$ tende ad $x$ la sequenza di segnali in output $y_n$ tende a $y$.
+		Ma cosa vuol dire che una sequenza di segnali \textit{tende} ad un segnale? 
+		Dobbiamo fare riferimento alle norme che approfondiremo nel capitolo dopo \ref{section:norme}, in quanto $x_n \rightarrow x \iff ||x_n - x|| \rightarrow 0$ cioè $x_n$ tende a $x$ se la distanza tra $x_n$ ed $x$ tende a 0.
 \end{enumerate}
 \begin{definition}
 	Un \textbf{filtro} è un sistema che rispetta le proprietà 1,3,4. Un sistema che rispetta anche la proprietà 2 è detto \textbf{Filtro causale}.
 \end{definition}
 \subsubsection{Norme}
 \label{section:norme}
-Abbiamo già citato due volte il discorso di norma, ma cosa vuol dire la norma in \C ?
-
-
+Abbiamo già citato due volte il discorso di norma, ma cosa vuol dire la norma in $\C$ ?
+Sia $I in \R $ un intervallo possiamo definire tre norme: 
+\begin{enumerate}
+	\item \textbf{norma uniforme}: Anche detta norma infinito.
+		$$ ||x||_{\infty} = sup|x(t)|$$
+		Cioè la norma uniforme di x è il suo estremo superiore.
+	\item \textbf{norma 1}: Anche detta norma della media.
+		$$ ||x||_1 = \int_I |x(t)| dt$$
+		Cioè, ci interessa un valore "normato" del segnale, ottenibile attraverso l'integrale.
+		Come in figura \ref{img:norma1_uguale} si può notare che segnali molto differenti possono avere norma 1 uguale.
+		\begin{figure}[h]
+			\includegraphics[width=\textwidth]{norma1_uguale.jpeg}
+			\caption{due funzioni il cui integrale ha lo stesso valore}
+			\label{img:norma1_uguale}
+		\end{figure}
+	\item \textbf{norma 2}: Norma della media quadratica.
+		$$ ||x||_2 = \sqrt{\int_I |x(t)|^2 dt}$$
+		Nota: $||x||_2^2$ rappresenta l'energia del segnale.  
+\end{enumerate}
+Notiamo che nel caso in cui le funzioni da considerare siano discrete possiamo ripetere le dimostrazioni in modo analogo, solo che al posto degli integrali avremo le sommatorie.
 \end{document}
