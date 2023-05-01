@@ -107,7 +107,7 @@ $$ z = \rho (cos \theta + sen \theta)=  \rho e^{i \theta}$$
 	$$e^z = e^xe^{iy}=e^x(cos\,y + i \, sen\,x)$$
 \end{definition}
 La forma esponenziale permette di svolgere calcoli in maniera più semplice (soprattuto moltiplicazioni e potenze). 
-\subsubsection{note} 
+\subsubsection{Note} 
 \appunto{poco importanti}\\
 Equivalenza tra la scrittura in forme algebrica e la scrittura come coppia di numeri reali.\\
 $x = (x,0)\; y=(y,0),\; i=(0,1)$\\ 
@@ -183,7 +183,7 @@ $$x(t) = \alpha (cos(\omega t + \phi) + i \; sen ( \omega t + \phi)) = \alpha e^
 I sistemi manipolano segnali, quindi prendono in input una funzione e restituiscono in output una differente funzione.
 Esempi di semplici sistemi sono: l'amplificatore $y(t) = kx(t)$ con $k$ costante , delayer $y(t) = x(t-a)$ con $a$ costante o il "derivatore" $y(t) = x'(t)$
 
-\subsubsection{proprietà dei sistemi}
+\subsubsection{Proprietà dei sistemi}
 I sistemi possono avere diverse proprietà, quelle che interessano a noi (poichè vanno a definire un \textit{filtro}) sono:
 \begin{enumerate}
 	\item Linearità: Dato $A: X \rightarrow Y$ $A$ è lineare se:
@@ -202,7 +202,8 @@ I sistemi possono avere diverse proprietà, quelle che interessano a noi (poich�
 	\item Continuità: Se se segnali di input sono "vicini" allora i due segnali di output sono "vicini" anch'essi. 
 		Quando la sequenza di segnali in input $x_n$ tende ad $x$ la sequenza di segnali in output $y_n$ tende a $y$.
 		Ma cosa vuol dire che una sequenza di segnali \textit{tende} ad un segnale? 
-		Dobbiamo fare riferimento alle norme che approfondiremo nel capitolo dopo \ref{section:norme}, in quanto $x_n \rightarrow x \iff ||x_n - x|| \rightarrow 0$ cioè $x_n$ tende a $x$ se la distanza tra $x_n$ ed $x$ tende a 0.
+		Dobbiamo fare riferimento alle norme che approfondiremo nel capitolo dopo \ref{section:norme}, in quanto $x_n \rightarrow x \iff ||x_n - x|| \rightarrow 0$ cioè $x_n$ tende a $x$ se la distanza tra $x_n$ ed $x$ tende a 0. 
+		Una definizione formale di Continuità è data al capitolo \ref{sec:continuità}
 \end{enumerate}
 \begin{definition}
 	Un \textbf{filtro} è un sistema che rispetta le proprietà 1,3,4. Un sistema che rispetta anche la proprietà 2 è detto \textbf{Filtro causale}.
@@ -227,6 +228,94 @@ Sia $I in \R $ un intervallo possiamo definire tre norme:
 	\item \textbf{norma 2}: Norma della media quadratica.
 		$$ ||x||_2 = \sqrt{\int_I |x(t)|^2 dt}$$
 		Nota: $||x||_2^2$ rappresenta l'energia del segnale.  
+		Nota 2: Questa norma in realtà deriva dal prodotto scalare , infatti presi due vettori $u$ e $v$ $u\quad x\quad v = u_1 * v_1+ \quad ... \quad u_n * v_n$ che riscritto nel continuo è
+		$$(x,y) = \int_I x(t)\overline{y}(t)dt$$
+		E $||x||_2$ non è altro che  $\sqrt{(x,x)}$.
+		Posso esprimere la norma 2 come prodotto scalare
 \end{enumerate}
 Notiamo che nel caso in cui le funzioni da considerare siano discrete possiamo ripetere le dimostrazioni in modo analogo, solo che al posto degli integrali avremo le sommatorie.
+\subsubsection{Continuità in norma}
+\label{sec:continuità}
+Tornando al discorso di \textbf{Continuità}: abbiamo detto \textit{ Quando la sequenza di segnali in input $x_n$ tende ad $x$ la sequenza di segnali in output $y_n$ tende a $y$.}
+Adesso che abbiamo la definizione di norma possiamo dire:\\
+Il sistema $A : (X, |. . . |_i ) \rightarrow (Y, | . . . |_j )$ \footnote{$X$ indica uno spazio di funzioni, $||...||_i$ indica la norma i-esima che viene usata in $X$ e la coppia $(X,|...|_i)$ è detta \textit{spazio normato}}
+è continuo se\\ $\lim_{n\to\infty} ||x_n -x ||_i = 0 \Rightarrow \lim_{n\to\infty} ||y_n - y||_j = 0$ dove $y_n = Ax_n$  e $y = Ax$
+
+\appunto{Nota: un operatore può essere continuo rispetto ad una scelta di norme e non continuo rispetto ad un'altra scelta}
+\subsection{Funzione di trasferimeto di un filtro}
+Un filtro è un \textit{sitema continuo, lineare ed invariante per traslazioni}.
+Data la sua linearità vale che $A(\sum^k_{n=0} a_nx_n)= \sum^k_{n=0} a_nAx_n $.
+Ma dato che un filtro è anche continuo possiamo analizzarne il comportamento al limite, quindi:
+$$A(\sum^{\infty}_{n=0} a_nx_n)= \sum^{\infty}_{n=0} a_nA(x_n)$$
+Inoltre possiamo vedere un segnale come la somma pesate delle frequenze pure che lo compongono, quindi:
+$x(t)= \sum^{\infty}_{n=-\infty} c_ne^{2i\pi \lambda nt}$
+Dato che $2i\pi$ è una costante e possiamo riscrivere $e^{2i\pi \lambda t}$ come $e_{\lambda}(t)$
+
+Unendo queste due considerazioni possiamo scrivere un filtro come:
+$$y=Ax= \sum^{\infty}_{n=-\infty} c_nA(e^n_{\lambda})$$
+Cioè descriverlo secondo la sua funzione di trasferimento: una \textbf{funzione delle frequenze} che indica come il filtro attenua o amplifica le varie frequenze.
+$f_{\lambda} = Ae_{\lambda} = H(\lambda)e_{\lambda}$
+Dato un $e_{\lambda}$ ammissibile come input del filtro A
+$$A(e_{\lambda}) = H(\lambda) e_{\lambda}$$
+
+\subsubsection{Filtro passa basso ideale}
+Volendo crere un \textit{filtro passa basso}, cioè una funzione che per basse frequenze mantiene un segnale o lo amplifica, mentre impedisce alle alte frequenze il passaggio potremmo definire la seguente funzione $H(\lambda)$:
+\begin{equation*}
+H(\lambda)=
+	\begin{cases}
+		3, \text{ se } \lambda < 10.000 \\
+		0 \text{  altrimenti}
+	\end{cases}
+\end{equation*}
+
+\subsubsection{Circuito RC}
+\label{sec:circuito_rc}
+L'equazione differenziale che regola un circuito è la seguente:
+\begin{equation}\label{eq:RC_definition}
+RCv'(t) + v(t) = x(t)
+\end{equation}
+Ponendo $w(t)=v(t)e^{t/RC}$ possiamo riscrivere $v(t)=w(t)e^{-t/RC}$ per poi calcolare $v'(t)$ in modo da ottenere un valore di $w(t)$ dipendente solo da $R,C$ ed $x(s)$
+
+Dopo tanti calcoli che non sto a scrivere (che si possono trovare sugli appunti di Alfano) otteniamo:
+\begin{equation} \label{eq:RC}
+v(t) = Ax(t)= \frac{1}{RC}\int^t_{-\infty} e ^{-\frac{t-s}{RC}}x(s)ds
+\end{equation}
+Ove $x$ è il segnale in ingresso ($x(s)$ è la tensione in ingresso al tempo $s$).
+
+Questa espressione definisce un filtro? è lineare ed invariante, è continua?
+Ad esempio in norma infinito è continua, per affermare ciò bisogna solo verificare che $||Ax||_{\infty} \leq C||x||_{\infty}$
+Con tanti altri calcoli posso dimostrare che 
+$\frac{1}{RC}\int^t_{-\infty} e ^{-\frac{t-s}{RC}}x(s)ds \leq ||x||_{\infty}$ e di conseguenza $||Ax||_{\infty} \leq ||x||_{\infty}$ per cui $||Ax||_{\infty} \leq C||x||_{\infty}$
+
+\subsubsection{Convoluzione}
+Se definiamo
+$$h(t)= \frac{1}{RC}e^{-\frac{t}{RC}}u(t)$$
+ove $u(t)$ è la funzione \textit{Heavyside} \ref{FIG:heavyside}
+Possiamo riformulare l'equazione \ref{eq:RC}
+$$Ax(t) = \int^{\infty}_{-\infty}h(t-s)x(s)dsi=(h*x)(t)$$
+L'operazione definita dall'operatore $*$ è detta \textit{convoluzione} tra due segnali, in questo caso $h$ e $x$. \appunto{h contiene al suo interno $R$ e $C$ quindi ci dice come il segnale $x$ viene "trasformato"}
+
+\subsubsection{Funzione di trasferimento filtro RC}
+Riprendendo l'eq che definisce il filtro RC \ref{eq:RC_definition} possiamo ottenere la sua funzione di trasferimento.
+Quindi il nostro obbiettivo è trovare $h(\lambda)$ che definisce 
+$$v(t) = H(\lambda) e_{\lambda}(t)$$
+Cioè la funzione che data una frequenza pura del segnale di input descrive come il filtro la modifica.
+Sostituendo $v(t)$ nell'eq \ref{eq:RC_definition} otteniamo
+$$RC(H(\lambda) e_{\lambda}(t))' +H(\lambda) e_{\lambda}(t) = e_{\lambda}(t)$$
+Ricordando che $e_{\lambda} = e^{2i\pi \lambda }$ e derivando la parte dell'equazione che va derivata (\appunto{quella nelle prime parentesi con l'apice}) otteniamo
+$$RCH(\lambda) e^{2i\pi \lambda }2i\pi \lambda  + H(\lambda)e^{2i\pi \lambda } = e^{2i\pi \lambda }$$
+Raccogliendo $H(\lambda)$ e cancellando un po' di operatori che si elidono otteniamo finalmente
+\begin{align*}
+	(2i\pi \lambda RC +1) H(\lambda) = 1\\
+	H(\lambda) = \frac{1}{2i\pi \lambda RC +1}
+\end{align*}
+A noi di questa equazione interessa soprattutto il modulo, poichè ci mostra chiaramente che il filtro RC è un filtro passa basso. i segnali con una elevata frequenza (quindi con un $\lambda$ alto) vengono attenuati.
+$$|H(\lambda)|^2 = \frac{1}{4i\pi^2 \lambda^2 R^2C^2 +1}\qquad
+\footnote{se non tornano i conti è perchè non stai considerando che questo è un numero complesso, quindi il suo modulo è $|a+ib| = \sqrt{a^2 + b^2}$}$$
+
+		\begin{figure}[h]
+			\includegraphics[width=\textwidth]{RC_lowPass.png}
+			\caption{Il filtro RC è passa-basso}
+		\end{figure}
 \end{document}
+

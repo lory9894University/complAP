@@ -1,0 +1,20 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Numeri Complessi}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}definizione}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}proprietà}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Altre forme di scrittura}{2}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Trigonometrica}{2}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Esponenzionale}{3}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Note}{3}{subsubsection.1.3.3}%
+\contentsline {section}{\numberline {2}Segnali e sistemi}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Segnali}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Sistemi}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Proprietà dei sistemi}{5}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Norme}{6}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Continuità in norma}{7}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Funzione di trasferimeto di un filtro}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Filtro passa basso ideale}{7}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Circuito RC}{7}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Convoluzione}{8}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Funzione di trasferimento filtro RC}{8}{subsubsection.2.3.4}%
